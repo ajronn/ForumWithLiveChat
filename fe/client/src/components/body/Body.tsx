@@ -1,17 +1,17 @@
 import React from "react";
+import Section from "../section/Section"
 import style from "./Body.module.css"
+
+import { SECTION, SECTIONS, SPECIAL_SECTIONS } from "../../utils/index"
 
 const Body = () => {
     return (
         <div className={style.wrapper}>
             <div className={style.content} style={{ gridArea: "a" }}>
-                <div className={style.card} ></div>
-                <div className={style.card} ></div>
-                <div className={style.card} ></div>
-                <div className={style.card} ></div>
+                {SECTIONS.map((data: SECTION) => <Section data={data} />)}
             </div>
             <div className={`${style.content} ${style["content-separate"]}`} style={{ gridArea: "b" }}>
-                <div className={`${style.card}`} ></div>
+                {SPECIAL_SECTIONS.map((data: SECTION) => <Section data={data} />)}
             </div>
         </div>
     )

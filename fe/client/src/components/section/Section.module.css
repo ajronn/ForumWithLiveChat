@@ -1,0 +1,14 @@
+.section {
+    background: #f8f8fa;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+}
+
+.header {
+    width: auto;
+    height: 50px;
+    border-bottom: 2px solid #dfdfdf;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
