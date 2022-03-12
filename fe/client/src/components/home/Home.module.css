@@ -1,0 +1,6 @@
+.content {
+    width: 100%;
+    display: grid;
+    height: fit-content;
+    row-gap: 20px;
+}

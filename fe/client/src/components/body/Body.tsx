@@ -1,18 +1,33 @@
 import React from "react";
-import Section from "../section/Section"
+import { Route, Switch } from "react-router-dom";
+import Home from "../home/Home"
+import Aside from "../aside/Aside"
+import Topics from "../topics/Topics"
+import Subject from "../subject/Subject"
 import style from "./Body.module.css"
-
-import { SECTION, SECTIONS, SPECIAL_SECTIONS } from "../../utils/index"
+import { useAlerts } from "../alert/AlertLogic"
+import { AlertType } from "../alert/Alert"
 
 const Body = () => {
+    const { addAlert } = useAlerts()
     return (
         <div className={style.wrapper}>
-            <div className={style.content} style={{ gridArea: "a" }}>
-                {SECTIONS.map((data: SECTION) => <Section data={data} />)}
-            </div>
-            <div className={`${style.content} ${style["content-separate"]}`} style={{ gridArea: "b" }}>
-                {SPECIAL_SECTIONS.map((data: SECTION) => <Section data={data} />)}
-            </div>
+            <button onClick={() => addAlert('info', AlertType.INFO)} >add</button>
+            <button onClick={() => addAlert('error', AlertType.ERROR)} >add</button>
+            <button onClick={() => addAlert('success', AlertType.SUCCESS)} >add</button>
+            <button onClick={() => addAlert('warning', AlertType.WARNING)} >add</button>
+            <Switch>
+                <Route path="/topic/:id">
+                    <Topics />
+                </Route>
+                <Route path="/subject/:id">
+                    <Subject />
+                </Route>
+                <Route path="/">
+                    <Home />
+                </Route>
+            </Switch>
+            <Aside />
         </div>
     )
 }

@@ -1,0 +1,46 @@
+.container {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 99;
+}
+
+.alert {
+    height: 50px;
+    width: 285px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 23px 1fr;
+    column-gap: 13px;
+    padding-left: 13px;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+}
+
+.info {
+    background: rgb(205, 233, 245);
+    border: 1px solid rgb(183, 201, 212);
+    color: rgb(82, 126, 155);
+}
+
+.warning {
+    background: rgb(248, 243, 214);
+    border: 1px solid rgb(219, 214, 191);
+    color: rgb(110, 91, 50);
+}
+
+.error {
+    background: rgb(235, 200, 196);
+    border: 1px solid rgb(189, 163, 158);
+    color: rgb(149, 53, 60);
+}
+
+.success {
+    background: rgb(222, 242, 213);
+    border: 1px solid rgb(197, 213, 195);
+    color: rgb(91, 111, 82);
+}
