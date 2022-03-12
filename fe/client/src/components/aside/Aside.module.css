@@ -1,0 +1,16 @@
+.content {
+    width: 100%;
+    display: grid;
+    height: fit-content;
+    row-gap: 20px;
+}
+
+.content-separate {
+    margin-top: 100px;
+}
+
+@media only screen and (max-width: 1300px) {
+    .content-separate {
+        margin-top: 0;
+    }
+}
