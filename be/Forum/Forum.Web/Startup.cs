@@ -31,6 +31,9 @@ namespace Forum.Web
                 .AddDbContext<ForumDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<ISectionRepository, SectionRepository>();
+            services.AddScoped<ISubsectionRepository, SubsectionRepository>();
+            services.AddScoped<IThreadRepository, ThreadRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
             services.RegisterRequestHandlers();
             services.RegisterMapping();
             services.AddControllers();

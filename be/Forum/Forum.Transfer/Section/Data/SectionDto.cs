@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Forum.Transfer.Subsection;
+using Forum.Transfer.Subsection.Data;
 
-namespace Forum.Transfer.Section
+namespace Forum.Transfer.Section.Data
 {
     public class SectionDto
     {
