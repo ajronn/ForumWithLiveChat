@@ -28,7 +28,8 @@ namespace Forum.Domain.Implementation.Service
             var subsection = new Subsection
             {
                 Name = command.Name,
-                Description = command.Description
+                Description = command.Description,
+                SectionId = command.SectionId
             };
 
             await _context.Subsections.AddAsync(subsection);

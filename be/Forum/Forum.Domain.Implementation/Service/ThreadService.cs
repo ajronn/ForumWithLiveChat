@@ -28,7 +28,8 @@ namespace Forum.Domain.Implementation.Service
             var thread = new Thread
             {
                 Name = command.Name,
-                Description = command.Description
+                Description = command.Description,
+                SubsectionId = command.SubsectionId
             };
 
             await _context.Threads.AddAsync(thread);

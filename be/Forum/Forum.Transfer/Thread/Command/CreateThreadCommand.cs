@@ -9,5 +9,7 @@ namespace Forum.Transfer.Thread.Command
         [Required] public string Name { get; set; }
 
         [Required] public string Description { get; set; }
+
+        [Required] public int SubsectionId { get; set; }
     }
 }
