@@ -9,9 +9,9 @@ namespace Forum.Data.Entities
 
         public string Content { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-        public DateTime EditedAt { get; set; }
+        public DateTime? EditedAt { get; set; }
 
         public string UserId { get; set; }
 

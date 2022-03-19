@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Post\Command\" />
-    <Folder Include="Section\Command\" />
-    <Folder Include="Subsection\Command\" />
-    <Folder Include="Thread\Command\" />
     <Folder Include="User\Command\" />
     <Folder Include="User\Query\" />
   </ItemGroup>

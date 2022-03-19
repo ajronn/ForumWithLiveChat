@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Forum.Transfer.Subsection.Command;
+using Forum.Transfer.Subsection.Data;
 
 namespace Forum.Domain.Interface.Service
 {
-    class ISubsectionService
+    public interface ISubsectionService
     {
+        Task<SubsectionDto> CreateAsync(CreateSubsectionCommand command);
+        Task<SubsectionDto> UpdateAsync(UpdateSubsectionCommand command);
+        Task<int> DeleteAsync(DeleteSubsectionCommand command);
     }
 }

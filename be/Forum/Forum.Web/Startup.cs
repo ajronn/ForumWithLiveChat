@@ -10,6 +10,8 @@ using Forum.Domain.Interface.Repository;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Forum.Domain.Implementation.Repository;
+using Forum.Domain.Implementation.Service;
+using Forum.Domain.Interface.Service;
 using Forum.Handler;
 using Forum.Transfer.Section.Query;
 
@@ -34,6 +36,12 @@ namespace Forum.Web
             services.AddScoped<ISubsectionRepository, SubsectionRepository>();
             services.AddScoped<IThreadRepository, ThreadRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
+
+            services.AddScoped<ISectionService, SectionService>();
+            services.AddScoped<ISubsectionService, SubsectionService>();
+            services.AddScoped<IThreadService, ThreadService>();
+            services.AddScoped<IPostService, PostService>();
+
             services.RegisterRequestHandlers();
             services.RegisterMapping();
             services.AddControllers();
