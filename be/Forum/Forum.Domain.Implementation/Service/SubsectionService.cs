@@ -41,7 +41,7 @@ namespace Forum.Domain.Implementation.Service
         {
             await _subsectionRepository.EnsureExistsAsync(command.SubsectionId);
 
-            var subsection = await _context.Subsections.FirstOrDefaultAsync(x => x.SectionId == command.SubsectionId);
+            var subsection = await _context.Subsections.FirstOrDefaultAsync(x => x.SubsectionId == command.SubsectionId);
 
             subsection.Name = command.Name;
             subsection.Description = command.Description;
