@@ -36,13 +36,15 @@ namespace Forum.Domain.Implementation.Repository
 
         public async Task<List<ThreadDto>> GetThreadListAsync()
         {
-            var threads = await _context.Threads.ToListAsync();
+            var threads = await _context.Threads.Include(x => x.Posts).ToListAsync();
+
             return _mapper.Map<List<ThreadDto>>(threads);
         }
 
         public async Task<ThreadDto> GetThreadAsync(int threadId)
         {
             var thread = await _context.Threads
+                .Include(x => x.Posts)
                 .Where(x => x.ThreadId == threadId)
                 .FirstOrDefaultAsync();
 

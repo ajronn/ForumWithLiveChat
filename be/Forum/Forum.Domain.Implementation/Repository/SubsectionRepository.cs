@@ -36,13 +36,15 @@ namespace Forum.Domain.Implementation.Repository
 
         public async Task<List<SubsectionDto>> GetSubsectionListAsync()
         {
-            var subsections = await _context.Subsections.ToListAsync();
+            var subsections = await _context.Subsections
+                .Include(x => x.Threads).ToListAsync();
             return _mapper.Map<List<SubsectionDto>>(subsections);
         }
 
         public async Task<SubsectionDto> GetSubsectionAsync(int subsectionId)
         {
             var subsection = await _context.Subsections
+                .Include(x => x.Threads)
                 .Where(x => x.SubsectionId == subsectionId)
                 .FirstOrDefaultAsync();
 

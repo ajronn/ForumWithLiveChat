@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Forum.Data\Forum.Data.csproj" />
     <ProjectReference Include="..\Forum.Domain.Interface\Forum.Domain.Interface.csproj" />
     <ProjectReference Include="..\Forum.Transfer\Forum.Transfer.csproj" />
