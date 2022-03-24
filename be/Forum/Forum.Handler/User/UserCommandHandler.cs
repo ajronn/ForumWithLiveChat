@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Forum.Handler.User
 {
-    public class UserCommandHandler : IRequestHandler<CreateUserCommand, UserDto>
+    public class UserCommandHandler : IRequestHandler<CreateUserCommand, UserDto>, IRequestHandler<LoginCommand, SessionDto>
     {
         private readonly IUserService _userService;
 
@@ -19,6 +19,11 @@ namespace Forum.Handler.User
         public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             return await _userService.CreateAsync(request);
+        }
+
+        public async Task<SessionDto> Handle(LoginCommand request, CancellationToken cancellationToken)
+        {
+            return await _userService.Login(request);
         }
     }
 }

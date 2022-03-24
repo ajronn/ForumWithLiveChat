@@ -6,21 +6,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System.Reflection;
 using System.Text;
 using Forum.Data.Entities;
 using Forum.Domain.Interface.Repository;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Forum.Domain.Implementation.Repository;
 using Forum.Domain.Implementation.Service;
 using Forum.Domain.Interface.Service;
 using Forum.Handler;
-using Forum.Transfer.Section.Query;
-using Forum.Web.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using Forum.Core;
 
 namespace Forum.Web
 {

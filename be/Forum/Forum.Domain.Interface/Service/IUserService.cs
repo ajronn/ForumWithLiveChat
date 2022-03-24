@@ -7,5 +7,6 @@ namespace Forum.Domain.Interface.Service
     public interface IUserService
     {
         Task<UserDto> CreateAsync(CreateUserCommand command);
+        Task<SessionDto> Login(LoginCommand command);
     }
 }

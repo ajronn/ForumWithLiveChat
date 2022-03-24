@@ -21,5 +21,12 @@ namespace Forum.Web.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        [HttpPost(ApiRoutes.User.Login)]
+        public async Task<IActionResult> Login([FromBody] LoginCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
     }
 }

@@ -7,10 +7,13 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.10" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Forum.Core\Forum.Core.csproj" />
     <ProjectReference Include="..\Forum.Data\Forum.Data.csproj" />
     <ProjectReference Include="..\Forum.Domain.Interface\Forum.Domain.Interface.csproj" />
     <ProjectReference Include="..\Forum.Transfer\Forum.Transfer.csproj" />

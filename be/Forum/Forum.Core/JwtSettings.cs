@@ -1,4 +1,4 @@
-﻿namespace Forum.Web.Infrastructure
+﻿namespace Forum.Core
 {
     public class JwtSettings
     {
