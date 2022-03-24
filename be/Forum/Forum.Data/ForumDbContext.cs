@@ -24,6 +24,7 @@ namespace Forum.Data
             BuildSubsectionMapping(modelBuilder.Entity<Subsection>());
             BuildThreadMapping(modelBuilder.Entity<Thread>());
             BuildPostMapping(modelBuilder.Entity<Post>());
+            BuildUserMapping(modelBuilder.Entity<User>());
         }
 
 
@@ -70,6 +71,16 @@ namespace Forum.Data
                 .HasForeignKey(x => x.UserId);
 
             builder.HasKey(x => x.PostId);
+        }
+
+        private static void BuildUserMapping(EntityTypeBuilder<User> builder)
+        {
+            builder
+                .HasMany(p => p.Posts)
+                .WithOne(b => b.User)
+                .HasForeignKey(z => z.UserId);
+
+            builder.HasKey(x => x.Id);
         }
     }
 }

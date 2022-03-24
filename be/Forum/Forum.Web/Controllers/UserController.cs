@@ -18,8 +18,8 @@ namespace Forum.Web.Controllers
         [HttpPost(ApiRoutes.User.Register)]
         public async Task<IActionResult> Register([FromBody] CreateUserCommand command)
         {
-
-            return Ok();
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
     }
 }

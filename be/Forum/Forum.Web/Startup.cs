@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
+using Forum.Data.Entities;
 using Forum.Domain.Interface.Repository;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ using Forum.Handler;
 using Forum.Transfer.Section.Query;
 using Forum.Web.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Forum.Web
@@ -35,7 +37,18 @@ namespace Forum.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddEntityFrameworkNpgsql()
-                .AddDbContext<ForumDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+                .AddDbContext<ForumDbContext>(options =>
+                    options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<User, IdentityRole>(options =>
+                {
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequiredUniqueChars = 3;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.SignIn.RequireConfirmedAccount = false;
+                })
+                .AddEntityFrameworkStores<ForumDbContext>()
+                .AddDefaultTokenProviders();
 
             var jwtSettings = new JwtSettings();
             Configuration.Bind(nameof(jwtSettings), jwtSettings);
@@ -64,18 +77,18 @@ namespace Forum.Web
             services.AddScoped<IThreadRepository, ThreadRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
 
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISectionService, SectionService>();
             services.AddScoped<ISubsectionService, SubsectionService>();
             services.AddScoped<IThreadService, ThreadService>();
             services.AddScoped<IPostService, PostService>();
-            services.AddScoped<IUserService, UserService>();
 
             services.RegisterRequestHandlers();
             services.RegisterMapping();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Forum.Web", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Forum.Web", Version = "v1"});
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
@@ -92,10 +105,14 @@ namespace Forum.Web
                     {
                         new OpenApiSecurityScheme
                         {
-                            Reference = new OpenApiReference {
+                            Reference = new OpenApiReference
+                            {
                                 Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer" }
-                        }, new List<string>() }
+                                Id = "Bearer"
+                            }
+                        },
+                        new List<string>()
+                    }
                 });
             });
 
@@ -120,10 +137,7 @@ namespace Forum.Web
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Forum.Domain.Implementation.Service
             user.IsActive = false;
             user.IsArchival = false;
 
-            if (_context.Users.Any(x => x.Email == user.Email))
+            if (await _userManager.FindByEmailAsync(command.Email) != null)
             {
                 //exception użytkownik już istnieje
             }
