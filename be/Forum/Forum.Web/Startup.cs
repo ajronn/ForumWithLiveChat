@@ -68,6 +68,7 @@ namespace Forum.Web
             services.AddScoped<ISubsectionService, SubsectionService>();
             services.AddScoped<IThreadService, ThreadService>();
             services.AddScoped<IPostService, PostService>();
+            services.AddScoped<IUserService, UserService>();
 
             services.RegisterRequestHandlers();
             services.RegisterMapping();

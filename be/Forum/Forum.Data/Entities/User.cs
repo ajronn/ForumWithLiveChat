@@ -6,5 +6,9 @@ namespace Forum.Data.Entities
     public class User : IdentityUser
     {
         public ICollection<Post> Posts { get; set; }
+
+        public bool IsActive { get; set; }
+
+        public bool IsArchival { get; set; }
     }
 }
