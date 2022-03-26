@@ -39,7 +39,10 @@ namespace Forum.Domain.Implementation.Repository
 
         public async Task<List<SectionDto>> GetSectionListAsync()
         {
-            var sections = await _context.Sections.Include(x=>x.Subsections).ToListAsync();
+            var sections = await _context.Sections
+                .Include(x=>x.Subsections)
+                .ToListAsync();
+
             return _mapper.Map<List<SectionDto>>(sections);
         }
 

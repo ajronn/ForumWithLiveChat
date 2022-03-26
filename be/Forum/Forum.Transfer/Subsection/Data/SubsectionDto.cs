@@ -12,6 +12,8 @@ namespace Forum.Transfer.Subsection.Data
 
         public string Description { get; set; }
 
+        public int SectionId { get; set; }
+
         public SectionDto Section { get; set; }
 
         public ICollection<ThreadDto> Threads { get; set; }

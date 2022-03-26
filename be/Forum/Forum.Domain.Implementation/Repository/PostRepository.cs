@@ -39,7 +39,9 @@ namespace Forum.Domain.Implementation.Repository
 
         public async Task<List<PostDto>> GetPostListAsync()
         {
-            var posts = await _context.Posts.ToListAsync();
+            var posts = await _context.Posts
+                .ToListAsync();
+
             return _mapper.Map<List<PostDto>>(posts);
         }
 

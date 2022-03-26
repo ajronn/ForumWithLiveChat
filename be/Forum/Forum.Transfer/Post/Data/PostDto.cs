@@ -14,7 +14,11 @@ namespace Forum.Transfer.Post.Data
 
         public DateTime EditedAt { get; set; }
 
+        public string UserId { get; set; }
+
         public UserDto User { get; set; }
+
+        public int ThreadId { get; set; }
 
         public ThreadDto Thread { get; set; }
     }
