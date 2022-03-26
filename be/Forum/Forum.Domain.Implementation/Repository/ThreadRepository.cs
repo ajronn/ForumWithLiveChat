@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Forum.Core;
+using Forum.Core.Enums;
 using Forum.Data;
 using Forum.Domain.Interface.Repository;
 using Forum.Transfer.Thread.Data;
@@ -29,8 +31,9 @@ namespace Forum.Domain.Implementation.Repository
         public async Task EnsureExistsAsync(int threadId)
         {
             if (!await ExistsAsync(threadId))
-                //do późniejszej implementacji wraz z enum błędami
-                throw null;
+            {
+                throw new ForumException(ForumErrorCode.ThreadNotFound);
+            }
         }
 
 

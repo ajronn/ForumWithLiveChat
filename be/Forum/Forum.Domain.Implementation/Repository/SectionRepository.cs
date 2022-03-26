@@ -3,6 +3,8 @@ using System.Linq;
 using Forum.Data;
 using System.Threading.Tasks;
 using AutoMapper;
+using Forum.Core;
+using Forum.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 using Forum.Domain.Interface.Repository;
 using Forum.Transfer.Section.Data;
@@ -29,8 +31,9 @@ namespace Forum.Domain.Implementation.Repository
         public async Task EnsureExistsAsync(int sectionId)
         {
             if (!await ExistsAsync(sectionId))
-                //do późniejszej implementacji wraz z enum błędami
-                throw null;
+            {
+                throw new ForumException(ForumErrorCode.SectionNotFound);
+            }
         }
 
 

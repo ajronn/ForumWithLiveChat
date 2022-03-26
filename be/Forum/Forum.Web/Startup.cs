@@ -68,6 +68,7 @@ namespace Forum.Web
                     ValidateLifetime = true
                 };
             });
+            services.Configure<JwtSettings>(Configuration.GetSection("JwtSettings"));
 
             services.AddScoped<ISectionRepository, SectionRepository>();
             services.AddScoped<ISubsectionRepository, SubsectionRepository>();

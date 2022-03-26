@@ -5,11 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Forum.Transfer.Post.Command;
 using Forum.Transfer.Post.Query;
+using Forum.Web.Infrastructure;
 using MediatR;
 
 namespace Forum.Web.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class PostController : ControllerBase
     {
@@ -20,35 +20,35 @@ namespace Forum.Web.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
+        [HttpGet(ApiRoutes.Post.GetList)]
         public async Task<IActionResult> List()
         {
             var result = await _mediator.Send(new GetAllPostsQuery());
             return Ok(result);
         }
 
-        [HttpGet("{postId}")]
+        [HttpGet(ApiRoutes.Post.Get)]
         public async Task<IActionResult> Get(int postId)
         {
             var result = await _mediator.Send(new GetPostQuery(postId));
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost(ApiRoutes.Post.Create)]
         public async Task<IActionResult> Create([FromBody] CreatePostCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
         }
 
-        [HttpPut]
+        [HttpPut(ApiRoutes.Post.Update)]
         public async Task<IActionResult> Update([FromBody] UpdatePostCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
         }
 
-        [HttpDelete]
+        [HttpDelete(ApiRoutes.Post.Delete)]
         public async Task<IActionResult> Delete([FromBody] DeletePostCommand command)
         {
             var result = await _mediator.Send(command);

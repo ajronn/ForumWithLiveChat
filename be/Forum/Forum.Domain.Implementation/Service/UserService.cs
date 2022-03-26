@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Forum.Core;
+using Forum.Core.Enums;
 using Forum.Data;
 using Forum.Data.Entities;
 using Forum.Domain.Interface.Service;
@@ -12,6 +13,7 @@ using Forum.Transfer.User.Command;
 using Forum.Transfer.User.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Forum.Domain.Implementation.Service
@@ -23,11 +25,13 @@ namespace Forum.Domain.Implementation.Service
         private readonly UserManager<User> _userManager;
         private readonly JwtSettings _jwtSettings;
 
-        public UserService(ForumDbContext context, IMapper mapper, UserManager<User> userManager)
+        public UserService(ForumDbContext context, IMapper mapper, UserManager<User> userManager,
+            IOptions<JwtSettings> jwtSettings)
         {
             _context = context;
             _mapper = mapper;
             _userManager = userManager;
+            _jwtSettings = jwtSettings.Value;
         }
 
         public async Task<UserDto> CreateAsync(CreateUserCommand command)
@@ -38,14 +42,14 @@ namespace Forum.Domain.Implementation.Service
 
             if (await _userManager.FindByEmailAsync(command.Email) != null)
             {
-                //exception użytkownik już istnieje
+                throw new ForumException(ForumErrorCode.UserExists);
             }
 
             var result = await _userManager.CreateAsync(user, command.Password);
 
             if (!result.Succeeded)
             {
-                //exception rejestracja failed
+                throw new ForumException(ForumErrorCode.RegisterFailed);
             }
 
             return _mapper.Map<UserDto>(user);
@@ -56,22 +60,22 @@ namespace Forum.Domain.Implementation.Service
             var user = await _userManager.FindByEmailAsync(command.Email);
             if (user == null)
             {
-                //exception użytkownik nie istnieje
+                throw new ForumException(ForumErrorCode.UserNotFound);
             }
 
             if (!await _userManager.CheckPasswordAsync(user, command.Password))
             {
-                //exception złe hasło
+                throw new ForumException(ForumErrorCode.WrongPassword);
             }
 
             if (!user.IsActive)
             {
-                //exception użytkownik nie jest aktywny
+                throw new ForumException(ForumErrorCode.UserNotActive);
             }
 
             if (user.IsArchival)
             {
-                //exception użytkownik jest zarchiwizowany
+                throw new ForumException(ForumErrorCode.UserArchival);
             }
 
             return new SessionDto
@@ -84,7 +88,7 @@ namespace Forum.Domain.Implementation.Service
         private string GenerateSessionTokenForUser(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("aaaaaaaaaaaaaaaaaaa");
+            var key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
@@ -109,7 +113,7 @@ namespace Forum.Domain.Implementation.Service
 
             if (user == null)
             {
-                //exception użytkownik nie istnieje
+                throw new ForumException(ForumErrorCode.UserNotFound);
             }
 
             user.IsActive = true;
@@ -123,7 +127,7 @@ namespace Forum.Domain.Implementation.Service
 
             if (user == null)
             {
-                //exception użytkownik nie istnieje
+                throw new ForumException(ForumErrorCode.UserNotFound);
             }
 
             user.IsActive = false;
@@ -132,32 +136,34 @@ namespace Forum.Domain.Implementation.Service
             return _mapper.Map<UserDto>(user);
         }
 
-        public async Task ArchiveAsync(ArchiveUserCommand command)
+        public async Task<UserDto> ArchiveAsync(ArchiveUserCommand command)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == command.Id);
 
             if (user == null)
             {
-                //exception użytkownik nie istnieje
+                throw new ForumException(ForumErrorCode.UserNotFound);
             }
 
             user.IsArchival = true;
 
             await _context.SaveChangesAsync();
+            return _mapper.Map<UserDto>(user);
         }
 
-        public async Task DearchiveAsync(DearchiveUserCommand command)
+        public async Task<UserDto> DearchiveAsync(DearchiveUserCommand command)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == command.Id);
 
             if (user == null)
             {
-                //exception użytkownik nie istnieje
+                throw new ForumException(ForumErrorCode.UserNotFound);
             }
 
             user.IsArchival = false;
 
             await _context.SaveChangesAsync();
+            return _mapper.Map<UserDto>(user);
         }
     }
 }

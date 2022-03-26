@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using Forum.Transfer.Section.Command;
 using Forum.Transfer.Section.Query;
+using Forum.Web.Infrastructure;
 using MediatR;
 
 namespace Forum.Web.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class SectionController : ControllerBase
     {
@@ -17,35 +17,35 @@ namespace Forum.Web.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
+        [HttpGet(ApiRoutes.Section.GetList)]
         public async Task<IActionResult> List()
         {
             var result = await _mediator.Send(new GetAllSectionsQuery());
             return Ok(result);
         }
 
-        [HttpGet("{sectionId}")]
+        [HttpGet(ApiRoutes.Section.Get)]
         public async Task<IActionResult> Get(int sectionId)
         {
             var result = await _mediator.Send(new GetSectionQuery(sectionId));
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost(ApiRoutes.Section.Create)]
         public async Task<IActionResult> Create([FromBody] CreateSectionCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
         }
 
-        [HttpPut]
+        [HttpPut(ApiRoutes.Section.Update)]
         public async Task<IActionResult> Update([FromBody] UpdateSectionCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
         }
 
-        [HttpDelete]
+        [HttpDelete(ApiRoutes.Section.Delete)]
         public async Task<IActionResult> Delete([FromBody] DeleteSectionCommand command)
         {
             var result = await _mediator.Send(command);
