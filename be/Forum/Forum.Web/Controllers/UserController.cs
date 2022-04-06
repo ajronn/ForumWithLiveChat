@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Forum.Transfer.Shared;
 using Forum.Transfer.User.Command;
 using Forum.Web.Infrastructure;
 using MediatR;
@@ -22,7 +23,7 @@ namespace Forum.Web.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
             var result = await _mediator.Send(command);
-            return Ok(result);
+            return Ok(result.ToResponseDto());
         }
 
         [HttpPost(ApiRoutes.User.Login)]
@@ -31,7 +32,7 @@ namespace Forum.Web.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
             var result = await _mediator.Send(command);
-            return Ok(result);
+            return Ok(result.ToResponseDto());
         }
 
         [HttpPatch(ApiRoutes.User.ActivateUser)]
@@ -42,7 +43,7 @@ namespace Forum.Web.Controllers
 
             var result = await _mediator.Send(command);
 
-            return Ok(result);
+            return Ok(result.ToResponseDto());
         }
 
         [HttpPatch(ApiRoutes.User.DeactivateUser)]
@@ -53,7 +54,7 @@ namespace Forum.Web.Controllers
 
             var result = await _mediator.Send(command);
 
-            return Ok(result);
+            return Ok(result.ToResponseDto());
         }
 
         [HttpPatch(ApiRoutes.User.ArchiveUser)]
@@ -64,7 +65,7 @@ namespace Forum.Web.Controllers
 
             var result = await _mediator.Send(command);
 
-            return Ok(result);
+            return Ok(result.ToResponseDto());
         }
 
         [HttpPatch(ApiRoutes.User.DearchiveUser)]
@@ -75,7 +76,7 @@ namespace Forum.Web.Controllers
 
             var result = await _mediator.Send(command);
 
-            return Ok(result);
+            return Ok(result.ToResponseDto());
         }
     }
 }

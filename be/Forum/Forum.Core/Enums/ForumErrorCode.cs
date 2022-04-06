@@ -11,6 +11,7 @@
         PostNotFound,
         ThreadNotFound,
         SubsectionNotFound,
-        SectionNotFound
+        SectionNotFound,
+        UnexpectedError
     }
 }

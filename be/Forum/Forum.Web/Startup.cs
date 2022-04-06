@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Forum.Core;
+using Forum.Web.Infrastructure;
 
 namespace Forum.Web
 {
@@ -70,6 +71,8 @@ namespace Forum.Web
             });
             services.Configure<JwtSettings>(Configuration.GetSection("JwtSettings"));
 
+            services.AddMvc(x => x.Filters.AddService<ExceptionFilter>());
+            services.AddScoped<ExceptionFilter>();
             services.AddScoped<ISectionRepository, SectionRepository>();
             services.AddScoped<ISubsectionRepository, SubsectionRepository>();
             services.AddScoped<IThreadRepository, ThreadRepository>();

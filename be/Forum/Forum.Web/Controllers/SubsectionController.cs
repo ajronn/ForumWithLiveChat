@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Forum.Transfer.Shared;
 using Forum.Transfer.Subsection.Command;
 using Forum.Transfer.Subsection.Query;
 using Forum.Web.Infrastructure;
@@ -21,35 +22,35 @@ namespace Forum.Web.Controllers
         public async Task<IActionResult> List()
         {
             var result = await _mediator.Send(new GetAllSubsectionsQuery());
-            return Ok(result);
+            return Ok(result.ToResponseDto());
         }
 
         [HttpGet(ApiRoutes.Subsection.Get)]
         public async Task<IActionResult> Get(int subsectionId)
         {
             var result = await _mediator.Send(new GetSubsectionQuery(subsectionId));
-            return Ok(result);
+            return Ok(result.ToResponseDto());
         }
 
         [HttpPost(ApiRoutes.Subsection.Create)]
         public async Task<IActionResult> Create([FromBody] CreateSubsectionCommand command)
         {
             var result = await _mediator.Send(command);
-            return Ok(result);
+            return Ok(result.ToResponseDto());
         }
 
         [HttpPut(ApiRoutes.Subsection.Update)]
         public async Task<IActionResult> Update([FromBody] UpdateSubsectionCommand command)
         {
             var result = await _mediator.Send(command);
-            return Ok(result);
+            return Ok(result.ToResponseDto());
         }
 
         [HttpDelete(ApiRoutes.Subsection.Delete)]
         public async Task<IActionResult> Delete([FromBody] DeleteSubsectionCommand command)
         {
             var result = await _mediator.Send(command);
-            return Ok(result);
+            return Ok(result.ToResponseDto());
         }
     }
 }

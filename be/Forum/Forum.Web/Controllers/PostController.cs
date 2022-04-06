@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Forum.Transfer.Post.Command;
 using Forum.Transfer.Post.Query;
+using Forum.Transfer.Shared;
 using Forum.Web.Infrastructure;
 using MediatR;
 
@@ -24,35 +25,35 @@ namespace Forum.Web.Controllers
         public async Task<IActionResult> List()
         {
             var result = await _mediator.Send(new GetAllPostsQuery());
-            return Ok(result);
+            return Ok(result.ToResponseDto());
         }
 
         [HttpGet(ApiRoutes.Post.Get)]
         public async Task<IActionResult> Get(int postId)
         {
             var result = await _mediator.Send(new GetPostQuery(postId));
-            return Ok(result);
+            return Ok(result.ToResponseDto());
         }
 
         [HttpPost(ApiRoutes.Post.Create)]
         public async Task<IActionResult> Create([FromBody] CreatePostCommand command)
         {
             var result = await _mediator.Send(command);
-            return Ok(result);
+            return Ok(result.ToResponseDto());
         }
 
         [HttpPut(ApiRoutes.Post.Update)]
         public async Task<IActionResult> Update([FromBody] UpdatePostCommand command)
         {
             var result = await _mediator.Send(command);
-            return Ok(result);
+            return Ok(result.ToResponseDto());
         }
 
         [HttpDelete(ApiRoutes.Post.Delete)]
         public async Task<IActionResult> Delete([FromBody] DeletePostCommand command)
         {
             var result = await _mediator.Send(command);
-            return Ok(result);
+            return Ok(result.ToResponseDto());
         }
     }
 }
