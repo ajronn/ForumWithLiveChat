@@ -34,7 +34,7 @@ namespace Forum.Domain.Implementation.Service
             _jwtSettings = jwtSettings.Value;
         }
 
-        public async Task<UserDto> CreateAsync(CreateUserCommand command)
+        public async Task<UserBasicDto> CreateAsync(CreateUserCommand command)
         {
             var user = _mapper.Map<User>(command);
             user.IsActive = false;
@@ -52,7 +52,7 @@ namespace Forum.Domain.Implementation.Service
                 throw new ForumException(ForumErrorCode.RegisterFailed);
             }
 
-            return _mapper.Map<UserDto>(user);
+            return _mapper.Map<UserBasicDto>(user);
         }
 
         public async Task<SessionDto> Login(LoginCommand command)
@@ -81,7 +81,7 @@ namespace Forum.Domain.Implementation.Service
             return new SessionDto
             {
                 Token = GenerateSessionTokenForUser(user),
-                User = _mapper.Map<UserDto>(user)
+                User = _mapper.Map<UserBasicDto>(user)
             };
         }
 
@@ -107,7 +107,7 @@ namespace Forum.Domain.Implementation.Service
             return tokenHandler.WriteToken(token);
         }
 
-        public async Task<UserDto> ActivateAsync(ActivateUserCommand command)
+        public async Task<UserBasicDto> ActivateAsync(ActivateUserCommand command)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == command.Id);
 
@@ -118,10 +118,10 @@ namespace Forum.Domain.Implementation.Service
 
             user.IsActive = true;
             await _context.SaveChangesAsync();
-            return _mapper.Map<UserDto>(user);
+            return _mapper.Map<UserBasicDto>(user);
         }
 
-        public async Task<UserDto> DeactivateAsync(DeactivateUserCommand command)
+        public async Task<UserBasicDto> DeactivateAsync(DeactivateUserCommand command)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == command.Id);
 
@@ -133,10 +133,10 @@ namespace Forum.Domain.Implementation.Service
             user.IsActive = false;
 
             await _context.SaveChangesAsync();
-            return _mapper.Map<UserDto>(user);
+            return _mapper.Map<UserBasicDto>(user);
         }
 
-        public async Task<UserDto> ArchiveAsync(ArchiveUserCommand command)
+        public async Task<UserBasicDto> ArchiveAsync(ArchiveUserCommand command)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == command.Id);
 
@@ -148,10 +148,10 @@ namespace Forum.Domain.Implementation.Service
             user.IsArchival = true;
 
             await _context.SaveChangesAsync();
-            return _mapper.Map<UserDto>(user);
+            return _mapper.Map<UserBasicDto>(user);
         }
 
-        public async Task<UserDto> DearchiveAsync(DearchiveUserCommand command)
+        public async Task<UserBasicDto> DearchiveAsync(DearchiveUserCommand command)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == command.Id);
 
@@ -163,7 +163,7 @@ namespace Forum.Domain.Implementation.Service
             user.IsArchival = false;
 
             await _context.SaveChangesAsync();
-            return _mapper.Map<UserDto>(user);
+            return _mapper.Map<UserBasicDto>(user);
         }
     }
 }

@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Forum.Transfer.User.Command
 {
-    public class DearchiveUserCommand : IRequest<UserDto>
+    public class DearchiveUserCommand : IRequest<UserBasicDto>
     {
         [Required] public string Id { get; set; }
     }

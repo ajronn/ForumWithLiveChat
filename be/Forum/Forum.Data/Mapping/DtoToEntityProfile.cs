@@ -18,6 +18,7 @@ namespace Forum.Data.Mapping
             CreateMap<Thread, ThreadDto>().ReverseMap();
             CreateMap<Post, PostDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<User, UserBasicDto>().ReverseMap();
             CreateMap<CreateUserCommand, User>().ForMember(user => user.UserName,
                 map => map.MapFrom(dto => dto.Email));
         }
