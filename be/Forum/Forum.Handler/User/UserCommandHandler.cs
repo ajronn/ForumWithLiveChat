@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Forum.Domain.Interface.Service;
+using Forum.Transfer.Shared;
 using Forum.Transfer.User.Command;
 using Forum.Transfer.User.Data;
 using MediatR;
@@ -10,7 +11,8 @@ namespace Forum.Handler.User
     public class UserCommandHandler : IRequestHandler<CreateUserCommand, UserBasicDto>,
         IRequestHandler<LoginCommand, SessionDto>, IRequestHandler<ActivateUserCommand, UserBasicDto>,
         IRequestHandler<DeactivateUserCommand, UserBasicDto>, IRequestHandler<ArchiveUserCommand, UserBasicDto>,
-        IRequestHandler<DearchiveUserCommand, UserBasicDto>
+        IRequestHandler<DearchiveUserCommand, UserBasicDto>, IRequestHandler<UpdateUserCommand, UserBasicDto>, 
+        IRequestHandler<ChangePasswordCommand, EmptyDto>
     {
         private readonly IUserService _userService;
 
@@ -47,6 +49,16 @@ namespace Forum.Handler.User
         public async Task<UserBasicDto> Handle(DearchiveUserCommand request, CancellationToken cancellationToken)
         {
             return await _userService.DearchiveAsync(request);
+        }
+
+        public async Task<UserBasicDto> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        {
+            return await _userService.UpdateAsync(request);
+        }
+
+        public async Task<EmptyDto> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
+        {
+            return await _userService.ChangePassword(request);
         }
     }
 }

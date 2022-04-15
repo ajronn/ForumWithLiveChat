@@ -40,10 +40,10 @@ namespace Forum.Web
 
             services.AddIdentity<User, IdentityRole>(options =>
                 {
-                    options.Password.RequiredLength = 6;
-                    options.Password.RequiredUniqueChars = 3;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.SignIn.RequireConfirmedAccount = false;
+                    options.Password.RequiredLength = 8;
+                    options.Password.RequireUppercase = true;
+                    options.Password.RequireLowercase = true;
+                    options.Password.RequireDigit = true;
                 })
                 .AddEntityFrameworkStores<ForumDbContext>()
                 .AddDefaultTokenProviders();

@@ -17,6 +17,8 @@ namespace Forum.Web.Infrastructure
             public const string DeactivateUser = Root + "/user/deactivate";
             public const string ArchiveUser = Root + "/user/archive";
             public const string DearchiveUser = Root + "/user/dearchive";
+            public const string UpdateUser = Root + "/user/update";
+            public const string ChangePassword = Root + "/user/changepassword";
         }
 
         public static class Post

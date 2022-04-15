@@ -78,5 +78,23 @@ namespace Forum.Web.Controllers
 
             return Ok(result.ToResponseDto());
         }
+
+        [HttpPatch(ApiRoutes.User.UpdateUser)]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+            var result = await _mediator.Send(command);
+            return Ok(result.ToResponseDto());
+        }
+
+        [HttpPatch(ApiRoutes.User.ChangePassword)]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+            var result = await _mediator.Send(command);
+            return Ok(result.ToResponseDto());
+        }
     }
 }
