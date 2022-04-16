@@ -6,6 +6,7 @@ namespace Forum.Domain.Interface.Repository
 {
     public interface IUserRepository
     {
+        Task EnsureExistsAsync(string userId);
         Task<List<UserBasicDto>> GetUserListAsync();
         Task<UserDto> GetUserAsync(string userId);
     }

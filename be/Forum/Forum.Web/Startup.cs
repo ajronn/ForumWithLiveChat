@@ -73,6 +73,8 @@ namespace Forum.Web
 
             services.AddMvc(x => x.Filters.AddService<ExceptionFilter>());
             services.AddScoped<ExceptionFilter>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISectionRepository, SectionRepository>();
             services.AddScoped<ISubsectionRepository, SubsectionRepository>();
             services.AddScoped<IThreadRepository, ThreadRepository>();

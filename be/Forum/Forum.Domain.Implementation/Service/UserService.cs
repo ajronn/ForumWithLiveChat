@@ -9,6 +9,7 @@ using Forum.Core;
 using Forum.Core.Enums;
 using Forum.Data;
 using Forum.Data.Entities;
+using Forum.Domain.Interface.Repository;
 using Forum.Domain.Interface.Service;
 using Forum.Transfer.Shared;
 using Forum.Transfer.User.Command;
@@ -26,6 +27,7 @@ namespace Forum.Domain.Implementation.Service
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly JwtSettings _jwtSettings;
+        private readonly IUserRepository _userRepository;
 
         public UserService(ForumDbContext context, IMapper mapper, UserManager<User> userManager,
             IOptions<JwtSettings> jwtSettings)
@@ -67,12 +69,8 @@ namespace Forum.Domain.Implementation.Service
 
         public async Task<UserBasicDto> UpdateAsync(UpdateUserCommand command)
         {
+            await _userRepository.EnsureExistsAsync(command.Id);
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == command.Id);
-
-            if (user == null)
-            {
-                throw new ForumException(ForumErrorCode.UserNotFound);
-            }
 
             user.UserName = command.UserName;
             await _userManager.UpdateNormalizedUserNameAsync(user);
@@ -134,12 +132,8 @@ namespace Forum.Domain.Implementation.Service
 
         public async Task<UserBasicDto> ActivateAsync(ActivateUserCommand command)
         {
+            await _userRepository.EnsureExistsAsync(command.Id);
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == command.Id);
-
-            if (user == null)
-            {
-                throw new ForumException(ForumErrorCode.UserNotFound);
-            }
 
             user.IsActive = true;
             await _context.SaveChangesAsync();
@@ -148,12 +142,8 @@ namespace Forum.Domain.Implementation.Service
 
         public async Task<UserBasicDto> DeactivateAsync(DeactivateUserCommand command)
         {
+            await _userRepository.EnsureExistsAsync(command.Id);
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == command.Id);
-
-            if (user == null)
-            {
-                throw new ForumException(ForumErrorCode.UserNotFound);
-            }
 
             user.IsActive = false;
 
@@ -163,12 +153,8 @@ namespace Forum.Domain.Implementation.Service
 
         public async Task<UserBasicDto> ArchiveAsync(ArchiveUserCommand command)
         {
+            await _userRepository.EnsureExistsAsync(command.Id);
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == command.Id);
-
-            if (user == null)
-            {
-                throw new ForumException(ForumErrorCode.UserNotFound);
-            }
 
             user.IsArchival = true;
 
@@ -178,12 +164,8 @@ namespace Forum.Domain.Implementation.Service
 
         public async Task<UserBasicDto> DearchiveAsync(DearchiveUserCommand command)
         {
+            await _userRepository.EnsureExistsAsync(command.Id);
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == command.Id);
-
-            if (user == null)
-            {
-                throw new ForumException(ForumErrorCode.UserNotFound);
-            }
 
             user.IsArchival = false;
 
@@ -193,12 +175,8 @@ namespace Forum.Domain.Implementation.Service
 
         public async Task<EmptyDto> ChangePassword(ChangePasswordCommand command)
         {
+            await _userRepository.EnsureExistsAsync(command.Id);
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == command.Id);
-
-            if (user == null)
-            {
-                throw new ForumException(ForumErrorCode.UserNotFound);
-            }
 
             if (!await _userManager.CheckPasswordAsync(user, command.OldPassword))
                 throw new ForumException(ForumErrorCode.IncorrectPassword);
