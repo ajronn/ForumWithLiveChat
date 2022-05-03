@@ -1,19 +1,24 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Header from "./components/header/Header"
 import Body from "./components/body/Body"
-import { BrowserRouter as Router } from "react-router-dom";
+import Login from "./views/login/Login"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AlertsProvider from "./components/alert/AlertLogic"
-import { WEBSITE } from './config';
 
 const App = () => {
-  useEffect(() => {
-    console.log(WEBSITE)
-  }, [])
   return (
     <Router>
       <AlertsProvider>
-        <Header />
-        <Body />
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="">
+            <Header />
+            <Body />
+          </Route>
+
+        </Switch>
       </AlertsProvider>
     </Router>
   );
