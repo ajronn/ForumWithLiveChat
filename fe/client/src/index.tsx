@@ -3,10 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createStore } from "redux"
+import { Provider } from "react-redux"
+import { combinedReducers } from "./store/reducers"
+
+//@ts-ignore
+const store = createStore(combinedReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+//@ts-ignore
+store.subscribe(() => {
+  const { user } = store.getState().auth;
+  window.sessionStorage.setItem('auth', JSON.stringify(user))
+})
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

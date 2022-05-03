@@ -1,6 +1,7 @@
 import React from "react";
+import { SECTION, SUBSECTION } from "../../store/reducers/section";
 import SubSection from "../subsection/SubSection"
-import { SECTION, SUB_SECTION } from "../../utils/index"
+
 import style from "./Section.module.css"
 interface Props {
     data: SECTION
@@ -12,7 +13,9 @@ const Section = (props: Props) => {
             <div className={style.header}>
                 <p>{props.data.name}</p>
             </div>
-            {props.data.subSections.map((data: SUB_SECTION, i: number) => <SubSection key={i} style={`${i % 2 === 0 ? style['container-background'] : ''} ${props.onSubSectionClick ? style['container-clickable'] : ''}`} data={data} onSubSectionClick={props.onSubSectionClick} />)}
+            {props.data.subsections.map((data: SUBSECTION, index: number) => {
+                return <SubSection key={index} style={`${index % 2 === 0 ? style['container-background'] : ''} ${props.onSubSectionClick ? style['container-clickable'] : ''}`} data={data} onSubSectionClick={props.onSubSectionClick} />
+            })}
         </div>
     )
 }

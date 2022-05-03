@@ -4,6 +4,7 @@ import InfoImg from "../../utils/info.png"
 import WarningImg from "../../utils/warning.png"
 import ErrorImg from "../../utils/error.png"
 import SuccessImg from "../../utils/success.png"
+import CloseImg from "../../utils/close.png"
 
 export enum AlertType {
     INFO = 'info',
@@ -16,6 +17,7 @@ interface Props {
     id: string,
     message: string
     type?: AlertType
+    close: () => void
 }
 
 const Alert = (props: Props) => {
@@ -42,6 +44,7 @@ const Alert = (props: Props) => {
         <div className={`${style.alert} ${selectType()}`}>
             <div className={style.center}><img src={selectImage()} height={23} width={23} alt="" /></div>
             <div className={style.center}>{props.message}{props.id}</div>
+            <div className={style.close} onClick={() => { props.close() }}><img src={CloseImg} alt="" height={10} /></div>
         </div>
     )
 }
