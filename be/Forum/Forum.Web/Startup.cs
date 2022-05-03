@@ -127,9 +127,10 @@ namespace Forum.Web
             services.AddCors(o => o.AddPolicy(MyAllowSpecificOrigins,
                       builder =>
                       {
-                          builder.WithOrigins("https://localhost:3000", "http://localhost:3000")
+                          builder.WithOrigins("https://localhost:3000", "http://localhost:3000", "http://localhost:44339/", "https://localhost:44339/")
                       .AllowAnyMethod()
-                       .AllowAnyHeader();
+                      .AllowAnyHeader()
+                      .AllowAnyOrigin();
                       }));
         }
 
