@@ -60,7 +60,7 @@ class AlertsProvider extends React.Component<Props, STATE> {
             <Context.Provider value={this.state}>
                 <div className={style.container}>
                     {this.state.data.map((a: Alert) => {
-                        return <AlertUI message={a.message} type={a.type} id={a.id} />
+                        return <AlertUI key={a.id} message={a.message} type={a.type} id={a.id} close={() => this.removeAlert(a.id)} />
                     })}
                 </div>
                 {this.props.children}
