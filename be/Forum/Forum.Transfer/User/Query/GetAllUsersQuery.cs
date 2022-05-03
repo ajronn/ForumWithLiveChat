@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Forum.Transfer.User.Query
 {
-    public class GetAllUsersQuery : IRequest<List<UserDto>>
+    public class GetAllUsersQuery : IRequest<List<UserBasicDto>>
     {
     }
 }

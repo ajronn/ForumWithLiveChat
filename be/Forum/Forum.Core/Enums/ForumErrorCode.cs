@@ -12,6 +12,9 @@
         ThreadNotFound,
         SubsectionNotFound,
         SectionNotFound,
-        UnexpectedError
+        UnexpectedError,
+        IncorrectPassword,
+        ValidatePasswordFailed,
+        ChangePasswordFailed
     }
 }

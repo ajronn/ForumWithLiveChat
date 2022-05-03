@@ -41,10 +41,10 @@ namespace Forum.Web
 
             services.AddIdentity<User, IdentityRole>(options =>
                 {
-                    options.Password.RequiredLength = 6;
-                    options.Password.RequiredUniqueChars = 3;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.SignIn.RequireConfirmedAccount = false;
+                    options.Password.RequiredLength = 8;
+                    options.Password.RequireUppercase = true;
+                    options.Password.RequireLowercase = true;
+                    options.Password.RequireDigit = true;
                 })
                 .AddEntityFrameworkStores<ForumDbContext>()
                 .AddDefaultTokenProviders();
@@ -74,6 +74,8 @@ namespace Forum.Web
 
             services.AddMvc(x => x.Filters.AddService<ExceptionFilter>());
             services.AddScoped<ExceptionFilter>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISectionRepository, SectionRepository>();
             services.AddScoped<ISubsectionRepository, SubsectionRepository>();
             services.AddScoped<IThreadRepository, ThreadRepository>();

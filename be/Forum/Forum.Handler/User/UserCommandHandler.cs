@@ -1,16 +1,18 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Forum.Domain.Interface.Service;
+using Forum.Transfer.Shared;
 using Forum.Transfer.User.Command;
 using Forum.Transfer.User.Data;
 using MediatR;
 
 namespace Forum.Handler.User
 {
-    public class UserCommandHandler : IRequestHandler<CreateUserCommand, UserDto>,
-        IRequestHandler<LoginCommand, SessionDto>, IRequestHandler<ActivateUserCommand, UserDto>,
-        IRequestHandler<DeactivateUserCommand, UserDto>, IRequestHandler<ArchiveUserCommand, UserDto>,
-        IRequestHandler<DearchiveUserCommand, UserDto>
+    public class UserCommandHandler : IRequestHandler<CreateUserCommand, UserBasicDto>,
+        IRequestHandler<LoginCommand, SessionDto>, IRequestHandler<ActivateUserCommand, UserBasicDto>,
+        IRequestHandler<DeactivateUserCommand, UserBasicDto>, IRequestHandler<ArchiveUserCommand, UserBasicDto>,
+        IRequestHandler<DearchiveUserCommand, UserBasicDto>, IRequestHandler<UpdateUserCommand, UserBasicDto>, 
+        IRequestHandler<ChangePasswordCommand, EmptyDto>
     {
         private readonly IUserService _userService;
 
@@ -19,7 +21,7 @@ namespace Forum.Handler.User
             _userService = userService;
         }
 
-        public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<UserBasicDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             return await _userService.CreateAsync(request);
         }
@@ -29,24 +31,34 @@ namespace Forum.Handler.User
             return await _userService.Login(request);
         }
 
-        public async Task<UserDto> Handle(ActivateUserCommand request, CancellationToken cancellationToken)
+        public async Task<UserBasicDto> Handle(ActivateUserCommand request, CancellationToken cancellationToken)
         {
             return await _userService.ActivateAsync(request);
         }
 
-        public async Task<UserDto> Handle(DeactivateUserCommand request, CancellationToken cancellationToken)
+        public async Task<UserBasicDto> Handle(DeactivateUserCommand request, CancellationToken cancellationToken)
         {
             return await _userService.DeactivateAsync(request);
         }
 
-        public async Task<UserDto> Handle(ArchiveUserCommand request, CancellationToken cancellationToken)
+        public async Task<UserBasicDto> Handle(ArchiveUserCommand request, CancellationToken cancellationToken)
         {
             return await _userService.ArchiveAsync(request);
         }
 
-        public async Task<UserDto> Handle(DearchiveUserCommand request, CancellationToken cancellationToken)
+        public async Task<UserBasicDto> Handle(DearchiveUserCommand request, CancellationToken cancellationToken)
         {
             return await _userService.DearchiveAsync(request);
+        }
+
+        public async Task<UserBasicDto> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        {
+            return await _userService.UpdateAsync(request);
+        }
+
+        public async Task<EmptyDto> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
+        {
+            return await _userService.ChangePassword(request);
         }
     }
 }

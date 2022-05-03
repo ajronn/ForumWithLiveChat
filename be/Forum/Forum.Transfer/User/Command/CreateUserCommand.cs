@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Forum.Transfer.User.Command
 {
-    public class CreateUserCommand : IRequest<UserDto>
+    public class CreateUserCommand : IRequest<UserBasicDto>
     {
         [Required] public string Email { get; set; }
 
