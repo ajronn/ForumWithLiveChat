@@ -17,7 +17,7 @@ const Home = () => {
     }, [dispatch])
 
     const onSubSectionClickHandler = (id: string) => {
-        history.push("/topic/" + id);
+        history.push("/thread/" + id);
     }
     return (
         <div className={style.content} style={{ gridArea: "a" }}>

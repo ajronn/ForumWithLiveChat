@@ -12,7 +12,6 @@ export class SectionService {
             },
             method: "GET",
         }).then((res: any) => res.json()).then((data) => {
-            console.log(data)
             const sections: SECTION[] = data.data;
             dispatch(getSections(sections))
         })

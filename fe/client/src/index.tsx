@@ -12,7 +12,6 @@ const store = createStore(combinedReducers, window.__REDUX_DEVTOOLS_EXTENSION__ 
 //@ts-ignore
 store.subscribe(() => {
   const { user } = store.getState().auth;
-  console.log(store.getState())
   window.sessionStorage.setItem('auth', JSON.stringify(user))
 })
 

@@ -5,6 +5,7 @@ import { AuthService, LOGIN_PAYLOAD } from "../../services/authService"
 import { useSelector } from "react-redux"
 import { IRootState } from "../../store/reducers"
 import { useDispatch } from "react-redux";
+import { sessionStorageUser } from "../../tools";
 
 const Login = () => {
     const [payload, setPayload] = useState<LOGIN_PAYLOAD>({
@@ -16,15 +17,16 @@ const Login = () => {
     const { user } = useSelector((state: IRootState) => state.auth)
     const dispatch = useDispatch()
     useEffect(() => {
-        const authObj = sessionStorage.getItem('auth')
-        if (authObj !== "null") {
+        if (sessionStorageUser()) {
             history.replace('/')
         }
     }, [user, history])
 
     const login = () => {
         if (payload.email && payload.password) {
-            AuthService.login(dispatch, payload).finally(() => { window.location.reload() })
+            AuthService.login(dispatch, payload).finally(() => {
+                //  window.location.reload()
+            })
         }
     }
 
