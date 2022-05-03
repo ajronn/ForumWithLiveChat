@@ -8,10 +8,13 @@ using Forum.Transfer.Thread.Command;
 using Forum.Transfer.Thread.Query;
 using Forum.Web.Infrastructure;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Forum.Web.Controllers
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ThreadController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -21,6 +24,7 @@ namespace Forum.Web.Controllers
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
         [HttpGet(ApiRoutes.Thread.GetList)]
         public async Task<IActionResult> List()
         {
@@ -32,6 +36,7 @@ namespace Forum.Web.Controllers
             return Ok(result.ToResponseDto());
         }
 
+        [AllowAnonymous]
         [HttpGet(ApiRoutes.Thread.Get)]
         public async Task<IActionResult> Get(int threadId)
         {
