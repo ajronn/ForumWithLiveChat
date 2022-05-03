@@ -23,12 +23,17 @@ const Threads = () => {
 
     return (
         <div className={style.container}>
-            <h1>{name}</h1>
-            {data.map((thread, index) => {
-                return <div key={index} className={`${style.tile} ${style['tile-clickable']}`} onClick={() => onTopicClickHandler(thread.threadId)} >
-                    {thread.name}
-                </div>
-            })}
+            {
+                data.length !== 0 ? <>
+                    <h1>{name}</h1>
+                    {data.map((thread, index) => {
+                        return <div key={index} className={`${style.tile} ${style['tile-clickable']}`} onClick={() => onTopicClickHandler(thread.threadId)} >
+                            {thread.name}
+                        </div>
+                    })}
+                </>
+                    : <h1>Brak wątków</h1>
+            }
         </div>
     )
 }
