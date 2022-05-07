@@ -39,22 +39,31 @@ export const Threads = () => {
         <div className={style.container}>
             <Button onClick={() => history.push('/')}>Powrót</Button>
 
-            {isModalVisible ? <Modal>
-                <AddThreadForm id={Number(id)} close={() => closeModal()} />
-            </Modal> : ''}
             {
-                threads.length !== 0 ? <>
-                    <h1>{name}</h1>
-                    <LoggedInGuard>
-                        <Button onClick={addThread} >Dodaj wątek</Button>
-                    </LoggedInGuard>
-                    {threads.map((thread, index) => {
-                        return <div key={index} className={`${style.tile} ${style['tile-clickable']}`} onClick={() => onTopicClickHandler(thread.threadId)} >
-                            {thread.name}
-                        </div>
-                    })}
-                </>
-                    : <h1>Brak wątków</h1>
+                isModalVisible
+                    ?
+                    <Modal>
+                        <AddThreadForm id={Number(id)} close={() => closeModal()} />
+                    </Modal>
+                    :
+                    ''
+            }
+            {
+                threads.length !== 0
+                    ?
+                    <>
+                        <h1>{name}</h1>
+                        <LoggedInGuard>
+                            <Button onClick={addThread} >Dodaj wątek</Button>
+                        </LoggedInGuard>
+                        {threads.map((thread, index) => {
+                            return <div key={index} className={`${style.tile} ${style['tile-clickable']}`} onClick={() => onTopicClickHandler(thread.threadId)} >
+                                {thread.name}
+                            </div>
+                        })}
+                    </>
+                    :
+                    <h1>Brak wątków</h1>
             }
         </div>
     )
