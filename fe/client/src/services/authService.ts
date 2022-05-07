@@ -21,6 +21,8 @@ export class AuthService {
         }).then((res: any) => res.json()).then((data) => {
             const user: USER = data.data.user
             dispatch(log_in(user))
+        }).catch((err) => {
+            dispatch(log_in(undefined))
         })
     }
     static logout(dispatch: Dispatch<AnyAction>) {

@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Home from "../../views/home/Home"
 import Aside from "../aside/Aside"
 import Threads from "../threads/Threads"
-import Subject from "../subject/Subject"
+import Post from "../post/Post"
 import style from "./Body.module.css"
 
 const Body = () => {
@@ -13,8 +13,8 @@ const Body = () => {
                 <Route path="/thread/:id">
                     <Threads />
                 </Route>
-                <Route path="/subject/:id">
-                    <Subject />
+                <Route path="/post/:id">
+                    <Post />
                 </Route>
                 <Route path="/">
                     <Home />

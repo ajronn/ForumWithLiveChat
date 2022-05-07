@@ -17,7 +17,6 @@ const App = () => {
             <Header />
             <Body />
           </Route>
-
         </Switch>
       </AlertsProvider>
     </Router>
