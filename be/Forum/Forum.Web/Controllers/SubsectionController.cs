@@ -4,11 +4,14 @@ using Forum.Transfer.Subsection.Command;
 using Forum.Transfer.Subsection.Query;
 using Forum.Web.Infrastructure;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.Web.Controllers
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class SubsectionController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -18,6 +21,7 @@ namespace Forum.Web.Controllers
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
         [HttpGet(ApiRoutes.Subsection.GetList)]
         public async Task<IActionResult> List()
         {
@@ -29,6 +33,7 @@ namespace Forum.Web.Controllers
             return Ok(result.ToResponseDto());
         }
 
+        [AllowAnonymous]
         [HttpGet(ApiRoutes.Subsection.Get)]
         public async Task<IActionResult> Get(int subsectionId)
         {

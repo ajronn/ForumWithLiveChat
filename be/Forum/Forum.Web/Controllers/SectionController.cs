@@ -5,10 +5,13 @@ using Forum.Transfer.Section.Query;
 using Forum.Transfer.Shared;
 using Forum.Web.Infrastructure;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Forum.Web.Controllers
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class SectionController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -18,6 +21,7 @@ namespace Forum.Web.Controllers
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
         [HttpGet(ApiRoutes.Section.GetList)]
         public async Task<IActionResult> List()
         {
@@ -29,6 +33,7 @@ namespace Forum.Web.Controllers
             return Ok(result.ToResponseDto());
         }
 
+        [AllowAnonymous]
         [HttpGet(ApiRoutes.Section.Get)]
         public async Task<IActionResult> Get(int sectionId)
         {

@@ -3,15 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Forum.Core;
 using Forum.Transfer.Post.Command;
 using Forum.Transfer.Post.Query;
 using Forum.Transfer.Shared;
 using Forum.Web.Infrastructure;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Forum.Web.Controllers
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PostController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -21,6 +25,7 @@ namespace Forum.Web.Controllers
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
         [HttpGet(ApiRoutes.Post.GetList)]
         public async Task<IActionResult> List()
         {
@@ -32,6 +37,7 @@ namespace Forum.Web.Controllers
             return Ok(result.ToResponseDto());
         }
 
+        [AllowAnonymous]
         [HttpGet(ApiRoutes.Post.Get)]
         public async Task<IActionResult> Get(int postId)
         {
