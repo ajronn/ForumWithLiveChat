@@ -6,7 +6,7 @@ import { AuthService } from "../../services/authService";
 import { LoggedInGuard, LoggedOutGuard } from "../../guards/authGuards"
 
 import { Logo } from "./logo/Logo"
-import { Avatar } from ".."
+import { Avatar, Button } from ".."
 
 import style from "./Header.module.css"
 import { BACKGROUND } from "../../utils/index"
@@ -18,15 +18,17 @@ export const Header = () => {
     return (
         <div className={style.container}>
             <div className={style.bar}>
-                <Logo />
                 <div>
-                    <LoggedInGuard>
-                        <button onClick={() => { AuthService.logout(dispatch) }} >Logout</button>
-                        <Avatar />
-                    </LoggedInGuard>
+                    <Logo />
+                </div>
+                <div className={style.right}>
                     <LoggedOutGuard>
-                        <button onClick={() => history.push("/login")} >Login</button>
+                        <Button onClick={() => history.push("/login")} >Zaloguj</Button>
                     </LoggedOutGuard>
+                    <LoggedInGuard>
+                        <Avatar />
+                        <Button onClick={() => { AuthService.logout(dispatch) }} >Wyloguj</Button>
+                    </LoggedInGuard>
                 </div>
             </div>
             <div className={style.graphic} style={{ backgroundImage: `url(${BACKGROUND})` }} />

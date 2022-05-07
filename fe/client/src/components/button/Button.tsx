@@ -7,7 +7,7 @@ type PROPS = {
 
 export const Button = (props: PROPS) => {
     return (
-        <button className={style.butt} onClick={props.onClick}>
+        <button className={style.butt} type="button" onClick={props.onClick}>
             {props.children}
         </button>
     )
