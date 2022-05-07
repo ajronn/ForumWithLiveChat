@@ -1,10 +1,10 @@
 import React from "react";
 import style from "./Alert.module.css"
-import InfoImg from "../../utils/info.png"
-import WarningImg from "../../utils/warning.png"
-import ErrorImg from "../../utils/error.png"
-import SuccessImg from "../../utils/success.png"
-import CloseImg from "../../utils/close.png"
+import InfoImg from "../../utils/images/info.png"
+import WarningImg from "../../utils/images/warning.png"
+import ErrorImg from "../../utils/images/error.png"
+import SuccessImg from "../../utils/images/success.png"
+import CloseImg from "../../utils/images/close.png"
 
 export enum AlertType {
     INFO = 'info',
@@ -20,7 +20,7 @@ interface Props {
     close: () => void
 }
 
-const Alert = (props: Props) => {
+export const Alert = (props: Props) => {
     const selectType = (): string => {
         const styles = {
             [AlertType.INFO]: style.info,
@@ -48,5 +48,3 @@ const Alert = (props: Props) => {
         </div>
     )
 }
-
-export default Alert;

@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { PostService } from "../../services/postService";
-import { IRootState } from "../../store/reducers";
-import style from "./Post.module.css"
+import { useSelector, useDispatch } from "react-redux";
+import { useParams, useHistory } from "react-router-dom";
 
-const Post = () => {
+import { LoggedInGuard } from "../../../guards/authGuards";
+import { PostService } from "../../../services/postService";
+import { IRootState } from "../../../store/reducers";
+
+import style from "./Posts.module.css"
+
+export const Posts = () => {
     const [form, setForm] = useState<string>('')
-    const { id } = useParams<{ id: string }>();
+    const { thread, id } = useParams<{ thread: string, id: string }>();
     const dispatch = useDispatch()
     const { data } = useSelector((state: IRootState) => state.post)
+    const history = useHistory();
     useEffect(() => {
         PostService.get(dispatch, id)
     }, [])
@@ -40,6 +43,7 @@ const Post = () => {
 
     return (
         <div className={style.container}>
+            <button onClick={() => history.push(`/thread/${thread}`)}>Powrót</button>
             {data.map((post, index) => {
                 return (
                     <div key={index + "post"} className={style.post}>
@@ -54,17 +58,17 @@ const Post = () => {
                         </div>
                     </div>)
             })}
-            <div>
-                <form>
-                    <label>
-                        Treść postu
-                        <input onChange={(event) => setContent(event.target.value)} />
-                    </label>
-                    <button type="button" onClick={addPost}>Dodaj</button>
-                </form>
-            </div>
+            <LoggedInGuard>
+                <div>
+                    <form>
+                        <label>
+                            Treść postu
+                            <input onChange={(event) => setContent(event.target.value)} />
+                        </label>
+                        <button type="button" onClick={addPost}>Dodaj</button>
+                    </form>
+                </div>
+            </LoggedInGuard>
         </div>
     )
 }
-
-export default Post

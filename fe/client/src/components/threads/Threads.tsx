@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
+import { LoggedInGuard } from "../../guards/authGuards";
 import { ThreadService } from "../../services/threadService";
 import { IRootState } from "../../store/reducers";
 import AddModal from "./add-modal/AddModal"
@@ -20,7 +21,7 @@ const Threads = () => {
     }, [])
 
     const onTopicClickHandler = (topicId: number) => {
-        history.push('/post/' + topicId)
+        history.push(`/post/${id}/${topicId}`)
     }
 
     const addThread = () => {
@@ -33,11 +34,14 @@ const Threads = () => {
 
     return (
         <div className={style.container}>
+            <button onClick={() => history.push('/')}>Powrót</button>
             {isModalVisible ? <AddModal close={closeModal} id={Number(id)} /> : ''}
             {
                 data.length !== 0 ? <>
                     <h1>{name}</h1>
-                    <button onClick={addThread} >+</button>
+                    <LoggedInGuard>
+                        <button onClick={addThread} >+</button>
+                    </LoggedInGuard>
                     {data.map((thread, index) => {
                         return <div key={index} className={`${style.tile} ${style['tile-clickable']}`} onClick={() => onTopicClickHandler(thread.threadId)} >
                             {thread.name}

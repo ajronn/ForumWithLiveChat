@@ -1,4 +1,4 @@
-import { sessionStorageUser } from "../../tools"
+import { isUserInSessionStorage } from "../../tools"
 import { AUTH_ACTIONS } from "../actions/auth"
 
 export type USER = {
@@ -15,7 +15,7 @@ const INIT_STATE: {
     error: string | null,
 } = {
     token: null,
-    user: sessionStorageUser(),
+    user: isUserInSessionStorage(),
     error: null,
 }
 

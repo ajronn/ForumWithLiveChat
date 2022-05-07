@@ -1,31 +1,28 @@
-import React, { useEffect } from "react";
-import Section from "../../components/section/Section"
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+
+import { Body } from "./body/Body"
+import { Posts } from "./posts/Posts"
+import Aside from "../../components/aside/Aside"
+import Threads from "../../components/threads/Threads"
+
 import style from "./Home.module.css"
-import { useHistory } from "react-router-dom";
 
-import { SectionService } from "../../services/sectionService";
-import { useDispatch, useSelector } from "react-redux";
-import { IRootState } from "../../store/reducers";
-
-const Home = () => {
-    const { data } = useSelector((state: IRootState) => state.sections)
-
-    const history = useHistory();
-    const dispatch = useDispatch();
-    useEffect(() => {
-        SectionService.get(dispatch)
-    }, [dispatch])
-
-    const onSubSectionClickHandler = (id: string) => {
-        history.push("/thread/" + id);
-    }
+export const Home = () => {
     return (
-        <div className={style.content} style={{ gridArea: "a" }}>
-            {data.map((sec, index) => {
-                return <Section key={index} data={sec} onSubSectionClick={(id: string) => onSubSectionClickHandler(id)} />
-            })}
+        <div className={style.wrapper}>
+            <Switch>
+                <Route path="/thread/:id">
+                    <Threads />
+                </Route>
+                <Route path="/post/:thread/:id">
+                    <Posts />
+                </Route>
+                <Route path="/">
+                    <Body />
+                </Route>
+            </Switch>
+            <Aside />
         </div>
     )
 }
-
-export default Home

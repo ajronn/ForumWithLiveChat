@@ -1,4 +1,4 @@
-.section {
+.container {
     background: #f8f8fa;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
     width: 100%;
@@ -13,10 +13,10 @@
     padding: 0 20px;
 }
 
-.container-background {
+/* .container-background {
     background: #f1f1f1;
 }
 
 .container-clickable {
     cursor: pointer;
-}
+} */
