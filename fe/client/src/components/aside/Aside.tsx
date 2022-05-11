@@ -1,6 +1,5 @@
 import React from "react";
-import { SECTION, SPECIAL_SECTIONS } from "../../utils/index"
-import Section from "../section/Section"
+// import Section from "../section/Section"
 import style from "./Aside.module.css"
 
 const Aside = () => {

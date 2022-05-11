@@ -1,21 +1,14 @@
-import React from "react";
-import { SUBSECTION } from "../../store/reducers/section";
-
 import style from "./SubSection.module.css"
-
 interface Props {
-    data: SUBSECTION,
-    style?: string,
-    onSubSectionClick?: (id: string) => void
+    name: string,
+    description: string
 }
 
-const SubSection = (props: Props) => {
+export const SubSection = (props: Props) => {
     return (
-        <div className={`${style.container} ${props.style}`} onClick={() => props.onSubSectionClick && props.onSubSectionClick(`${props.data.subsectionId}`)}>
-            <p>{props.data.name}</p>
-            <p>{props.data.description}</p>
+        <div className={style.container}>
+            <p>{props.name}</p>
+            <p>{props.description}</p>
         </div>
     )
 }
-
-export default SubSection

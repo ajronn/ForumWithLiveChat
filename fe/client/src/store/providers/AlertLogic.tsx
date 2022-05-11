@@ -1,6 +1,9 @@
 import React, { createContext, useContext } from "react";
-import AlertUI, { AlertType } from "./Alert"
-import style from "./Alert.module.css"
+
+import { AlertType } from "../../components/alert/Alert"
+
+import style from "../../components/alert/Alert.module.css"
+import { Alert as AlertUI } from "../../components"
 
 interface Props {
     children: React.ReactNode
@@ -26,7 +29,7 @@ const st: STATE = {
 
 const Context = createContext(st)
 
-class AlertsProvider extends React.Component<Props, STATE> {
+export class AlertsProvider extends React.Component<Props, STATE> {
 
     checkId = (id: string): boolean => {
         return !!this.state.data.find((a) => a.id === id)
@@ -72,5 +75,3 @@ class AlertsProvider extends React.Component<Props, STATE> {
 export const useAlerts = () => {
     return useContext(Context);
 }
-
-export default AlertsProvider;

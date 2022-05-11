@@ -1,0 +1,17 @@
+.butt {
+    outline: none;
+    border: none;
+    background: #dfdfdf;
+    height: 25px;
+    width: fit-content;
+    padding: 0 10px;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.butt:hover {
+    background: #e4e4e4;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}

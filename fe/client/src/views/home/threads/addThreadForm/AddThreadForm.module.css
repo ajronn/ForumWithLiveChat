@@ -1,0 +1,15 @@
+.container {
+    height: 400px;
+    width: 500px;
+    background: #f8f8fa;
+}
+
+.form > label {
+    display: inline-block;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

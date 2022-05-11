@@ -2,16 +2,12 @@ import React from "react";
 import style from "./Logo.module.css"
 import { useHistory } from "react-router-dom";
 
-const Logo = () => {
+export const Logo = () => {
     const history = useHistory();
-    const onLogoClickHandler = () => {
-        history.push('/')
-    }
+
     return (
-        <div className={style.logo} onClick={onLogoClickHandler}>
+        <div className={style.logo} onClick={() => history.push('/')}>
             ForumWithLiveChat
         </div>
     )
 }
-
-export default Logo

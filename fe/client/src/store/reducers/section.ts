@@ -15,15 +15,15 @@ export type SECTION = {
 }
 
 const INIT_STATE: {
-    data: SECTION[]
+    sections: SECTION[]
 } = {
-    data: []
+    sections: []
 }
 
 export const sectionReducer = (state = INIT_STATE, action: { type: SECTION_ACTIONS, payload: SECTION[] }) => {
     switch (action.type) {
         case SECTION_ACTIONS.GET:
-            return { ...state, data: action.payload }
+            return { ...state, sections: action.payload }
         default:
             return state
     }

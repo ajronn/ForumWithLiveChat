@@ -5,9 +5,9 @@ import { AuthService, LOGIN_PAYLOAD } from "../../services/authService"
 import { useSelector } from "react-redux"
 import { IRootState } from "../../store/reducers"
 import { useDispatch } from "react-redux";
-import { sessionStorageUser } from "../../tools";
+import { isUserInSessionStorage } from "../../tools";
 
-const Login = () => {
+export const Login = () => {
     const [payload, setPayload] = useState<LOGIN_PAYLOAD>({
         email: '',
         password: '',
@@ -17,7 +17,7 @@ const Login = () => {
     const { user } = useSelector((state: IRootState) => state.auth)
     const dispatch = useDispatch()
     useEffect(() => {
-        if (sessionStorageUser()) {
+        if (isUserInSessionStorage()) {
             history.replace('/')
         }
     }, [user, history])
@@ -39,5 +39,3 @@ const Login = () => {
         </div>
     )
 }
-
-export default Login

@@ -1,9 +1,10 @@
 import React from 'react';
-import Header from "./components/header/Header"
-import Body from "./components/body/Body"
-import Login from "./views/login/Login"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import AlertsProvider from "./components/alert/AlertLogic"
+
+import { AlertsProvider } from "./store/providers/AlertLogic"
+
+import { Header } from "./components"
+import { Home, Login } from "./views"
 
 const App = () => {
   return (
@@ -13,11 +14,10 @@ const App = () => {
           <Route path="/login">
             <Login />
           </Route>
-          <Route path="">
+          <Route path="/">
             <Header />
-            <Body />
+            <Home />
           </Route>
-
         </Switch>
       </AlertsProvider>
     </Router>

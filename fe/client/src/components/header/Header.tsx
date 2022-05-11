@@ -1,41 +1,37 @@
 import React from "react";
-import Logo from "../logo/Logo"
-import Avatar from "../avatar/Avatar"
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+
+import { AuthService } from "../../services/authService";
+import { LoggedInGuard, LoggedOutGuard } from "../../guards/authGuards"
+
+import { Logo } from "./logo/Logo"
+import { Avatar, Button } from ".."
+
 import style from "./Header.module.css"
 import { BACKGROUND } from "../../utils/index"
 
-import { LoggedInGuard, LoggedOutGuard } from "../../guards/authGuards"
-import { useHistory } from "react-router-dom";
-import { AuthService } from "../../services/authService";
-import { useDispatch } from "react-redux";
-
-const Header = () => {
+export const Header = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-
-    const goToLoginPage = () => {
-        history.push("/login");
-    }
 
     return (
         <div className={style.container}>
             <div className={style.bar}>
-                <Logo />
                 <div>
-                    <LoggedInGuard>
-                        <button onClick={() => { AuthService.logout(dispatch) }} >Logout</button>
-                        <Avatar />
-                    </LoggedInGuard>
+                    <Logo />
+                </div>
+                <div className={style.right}>
                     <LoggedOutGuard>
-                        <button onClick={goToLoginPage} >Login</button>
+                        <Button onClick={() => history.push("/login")} >Zaloguj</Button>
                     </LoggedOutGuard>
+                    <LoggedInGuard>
+                        <Avatar />
+                        <Button onClick={() => { AuthService.logout(dispatch) }} >Wyloguj</Button>
+                    </LoggedInGuard>
                 </div>
             </div>
-            <div className={style.graphic} style={{ backgroundImage: `url(${BACKGROUND})` }}>
-
-            </div>
+            <div className={style.graphic} style={{ backgroundImage: `url(${BACKGROUND})` }} />
         </div>
     )
 }
-
-export default Header
