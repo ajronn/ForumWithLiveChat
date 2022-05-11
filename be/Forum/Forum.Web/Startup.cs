@@ -71,7 +71,7 @@ namespace Forum.Web
                 };
             });
             services.Configure<JwtSettings>(Configuration.GetSection("JwtSettings"));
-
+            services.AddSignalR();
             services.AddMvc(x => x.Filters.AddService<ExceptionFilter>());
             services.AddScoped<ExceptionFilter>();
             services.AddHttpContextAccessor();
@@ -80,12 +80,14 @@ namespace Forum.Web
             services.AddScoped<ISubsectionRepository, SubsectionRepository>();
             services.AddScoped<IThreadRepository, ThreadRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IChatRepository, ChatRepository>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISectionService, SectionService>();
             services.AddScoped<ISubsectionService, SubsectionService>();
             services.AddScoped<IThreadService, ThreadService>();
             services.AddScoped<IPostService, PostService>();
+            services.AddScoped<IChatService, ChatService>();
 
             services.RegisterRequestHandlers();
             services.RegisterMapping();
@@ -146,13 +148,15 @@ namespace Forum.Web
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
             app.UseCors(MyAllowSpecificOrigins);
-
+            app.UseRouting();
 
             app.UseAuthorization();
-
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<ChatService>("/chat");
+            });
         }
     }
 }

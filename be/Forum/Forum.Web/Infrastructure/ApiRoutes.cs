@@ -58,5 +58,12 @@ namespace Forum.Web.Infrastructure
             public const string Update = Root + "/section/update";
             public const string Delete = Root + "/section/delete";
         }
+
+        public static class Message
+        {
+            public const string GetList = Root + "/post/list";
+            public const string Get = Root + "/post/get";
+            public const string Create = Root + "/post/create";
+        }
     }
 }

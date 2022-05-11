@@ -15,6 +15,7 @@
         UnexpectedError,
         IncorrectPassword,
         ValidatePasswordFailed,
-        ChangePasswordFailed
+        ChangePasswordFailed,
+        MessageNotFound
     }
 }

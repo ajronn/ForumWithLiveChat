@@ -7,6 +7,8 @@ namespace Forum.Data.Entities
     {
         public ICollection<Post> Posts { get; set; }
 
+        public ICollection<Message> Messages { get; set; }
+
         public bool IsActive { get; set; }
 
         public bool IsArchival { get; set; }

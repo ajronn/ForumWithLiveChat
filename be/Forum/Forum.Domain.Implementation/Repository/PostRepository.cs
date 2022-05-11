@@ -36,7 +36,6 @@ namespace Forum.Domain.Implementation.Repository
             }
         }
 
-
         public async Task<List<PostDto>> GetPostListAsync()
         {
             var posts = await _context.Posts

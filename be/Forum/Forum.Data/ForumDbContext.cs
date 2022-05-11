@@ -16,6 +16,7 @@ namespace Forum.Data
         public DbSet<Subsection> Subsections { get; set; }
         public DbSet<Thread> Threads { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +26,7 @@ namespace Forum.Data
             BuildThreadMapping(modelBuilder.Entity<Thread>());
             BuildPostMapping(modelBuilder.Entity<Post>());
             BuildUserMapping(modelBuilder.Entity<User>());
+            BuildMessageMapping(modelBuilder.Entity<Message>());
         }
 
 
@@ -80,7 +82,22 @@ namespace Forum.Data
                 .WithOne(b => b.User)
                 .HasForeignKey(z => z.UserId);
 
+            builder
+                .HasMany(p => p.Messages)
+                .WithOne(b => b.User)
+                .HasForeignKey(z => z.UserId);
+
             builder.HasKey(x => x.Id);
+        }
+
+        private static void BuildMessageMapping(EntityTypeBuilder<Message> builder)
+        {
+            builder
+                .HasOne(x => x.User)
+                .WithMany(y => y.Messages)
+                .HasForeignKey(x => x.UserId);
+
+            builder.HasKey(x => x.MessageId);
         }
     }
 }
