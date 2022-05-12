@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Forum.Domain.Implementation.Service;
+using Forum.Domain.Interface.Service;
 using Forum.Transfer.Chat.Command;
 using Forum.Transfer.Chat.Query;
 using Forum.Transfer.Shared;
 using Forum.Web.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Forum.Web.Controllers
 {
@@ -13,11 +16,12 @@ namespace Forum.Web.Controllers
     public class ChatController : ControllerBase
     {
         private readonly IMediator _mediator;
-        //private readonly IHubContext<ChatService, IChatService> _hubContext;
+        private readonly IHubContext<ChatHub, IChatClient> _hubContext;
 
-        public ChatController(IMediator mediator)
+        public ChatController(IMediator mediator, IHubContext<ChatHub, IChatClient> hubContext)
         {
             _mediator = mediator;
+            _hubContext = hubContext;
         }
 
         [AllowAnonymous]
@@ -51,7 +55,7 @@ namespace Forum.Web.Controllers
                 return BadRequest();
 
             var result = await _mediator.Send(command);
-
+            await _hubContext.Clients.All.ReceiveMessage(result);
             return Ok(result.ToResponseDto());
         }
     }

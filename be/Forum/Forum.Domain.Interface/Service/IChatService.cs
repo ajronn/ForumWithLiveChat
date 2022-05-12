@@ -8,4 +8,9 @@ namespace Forum.Domain.Interface.Service
     {
         Task<MessageDto> CreateAsync(CreateMessageCommand command);
     }
+
+    public interface IChatClient
+    {
+        Task ReceiveMessage(MessageDto message);
+    }
 }

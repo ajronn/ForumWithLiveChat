@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Forum.Domain.Implementation.Service
 {
-    public class ChatService : Hub<IChatService>, IChatService
+    public class ChatService : IChatService
     {
         private readonly ForumDbContext _context;
         private readonly IMapper _mapper;
@@ -48,6 +48,14 @@ namespace Forum.Domain.Implementation.Service
             await _context.Messages.AddAsync(message);
             await _context.SaveChangesAsync();
             return _mapper.Map<MessageDto>(message);
+        }
+    }
+
+    public class ChatHub : Hub<IChatClient>
+    {
+        public async Task SendMessage(MessageDto message)
+        {
+            await Clients.All.ReceiveMessage(message);
         }
     }
 }
