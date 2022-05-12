@@ -48,7 +48,7 @@ namespace Forum.Web.Controllers
             return Ok(result.ToResponseDto());
         }
 
-        [HttpPost(ApiRoutes.Post.Create)]
+        [HttpPost(ApiRoutes.Message.Create)]
         public async Task<IActionResult> Create([FromBody] CreateMessageCommand command)
         {
             if (!ModelState.IsValid)

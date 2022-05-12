@@ -61,9 +61,9 @@ namespace Forum.Web.Infrastructure
 
         public static class Message
         {
-            public const string GetList = Root + "/post/list";
-            public const string Get = Root + "/post/get";
-            public const string Create = Root + "/post/create";
+            public const string GetList = Root + "/message/list";
+            public const string Get = Root + "/message/get";
+            public const string Create = Root + "/message/create";
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Forum.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -95,7 +96,7 @@ namespace Forum.Web
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Forum.Web", Version = "v1"});
-
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description =

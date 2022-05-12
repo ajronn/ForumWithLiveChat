@@ -31,15 +31,15 @@ namespace Forum.Domain.Implementation.Service
 
         public async Task<MessageDto> CreateAsync(CreateMessageCommand command)
         {
-            var userId = _httpContextAccessor.HttpContext.GetUserId();
+            //var userId = _httpContextAccessor.HttpContext.GetUserId();
 
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == userId);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == command.UserId);
 
             var message = new Message
             {
                 Content = command.Content,
                 CreatedAt = DateTime.Now,
-                UserId = userId,
+                UserId = user.Id,
                 UserName = user.UserName,
                 IsArchival = false,
                 User = user
