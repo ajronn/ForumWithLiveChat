@@ -155,7 +155,7 @@ namespace Forum.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<ChatService>("/chat");
+                endpoints.MapHub<ChatHub>("/chat");
             });
         }
     }

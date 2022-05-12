@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Forum.Data.Entities;
 using Forum.Transfer.Chat;
+using Forum.Transfer.Chat.Data;
 using Forum.Transfer.Post.Data;
 using Forum.Transfer.Section.Data;
 using Forum.Transfer.Subsection.Data;
