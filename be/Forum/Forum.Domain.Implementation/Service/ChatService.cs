@@ -53,9 +53,5 @@ namespace Forum.Domain.Implementation.Service
 
     public class ChatHub : Hub<IChatClient>
     {
-        public async Task SendMessage(MessageDto message)
-        {
-            await Clients.All.ReceiveMessage(message);
-        }
     }
 }
