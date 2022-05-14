@@ -8,6 +8,7 @@
     height: 50px;
     justify-content: space-between;
     padding: 0 50px;
+    align-items: center;
 }
 
 .graphic {
@@ -19,4 +20,8 @@
 .right {
     display: inline-flex;
     align-items: center;
+}
+
+.userName {
+    margin-right: 15px;
 }

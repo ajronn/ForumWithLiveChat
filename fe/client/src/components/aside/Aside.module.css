@@ -9,6 +9,21 @@
     margin-top: 100px;
 }
 
+.chat {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    background: #f8f8fa;
+    padding: 5px;
+    height: 300px;
+}
+
+.messages {
+    width: calc(100% - 15px);
+    height: 200px;
+    margin: 5px;
+    overflow-y: scroll;
+    resize: none;
+}
+
 @media only screen and (max-width: 1300px) {
     .content-separate {
         margin-top: 0;

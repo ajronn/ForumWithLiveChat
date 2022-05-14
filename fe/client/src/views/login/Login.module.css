@@ -11,6 +11,6 @@ h1 {
     margin: 10px 0;
 }
 
-input, button {
+.input, .button {
     margin: 10px;
 }

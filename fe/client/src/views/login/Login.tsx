@@ -7,6 +7,8 @@ import { IRootState } from "../../store/reducers"
 import { useDispatch } from "react-redux";
 import { isUserInSessionStorage } from "../../tools";
 
+import { Button, Input } from "@mui/material"
+
 export const Login = () => {
     const [payload, setPayload] = useState<LOGIN_PAYLOAD>({
         email: '',
@@ -33,9 +35,9 @@ export const Login = () => {
     return (
         <div className={style.container}>
             <h1>Login</h1>
-            <input onChange={(event) => { setPayload({ ...payload, email: event.target.value }) }} placeholder="Email" />
-            <input onChange={(event) => { setPayload({ ...payload, password: event.target.value }) }} placeholder="Password" type="password" />
-            <button onClick={login}>Login</button>
+            <Input className={style.input} onChange={(event) => { setPayload({ ...payload, email: event.target.value }) }} placeholder="Email" />
+            <Input className={style.input} onChange={(event) => { setPayload({ ...payload, password: event.target.value }) }} placeholder="Password" type="password" />
+            <Button className={style.button} variant="contained" onClick={login}>Login</Button>
         </div>
     )
 }

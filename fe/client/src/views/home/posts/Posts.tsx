@@ -8,6 +8,8 @@ import { IRootState } from "../../../store/reducers";
 
 import style from "./Posts.module.css"
 
+import { Button, Input } from "@mui/material"
+
 export const Posts = () => {
     const [form, setForm] = useState<string>('')
     const { thread, id } = useParams<{ thread: string, id: string }>();
@@ -63,9 +65,9 @@ export const Posts = () => {
                     <form>
                         <label>
                             Treść postu
-                            <input onChange={(event) => setContent(event.target.value)} />
+                            <Input onChange={(event) => setContent(event.target.value)} />
                         </label>
-                        <button type="button" onClick={addPost}>Dodaj</button>
+                        <Button variant="contained" type="button" onClick={addPost}>Dodaj</Button>
                     </form>
                 </div>
             </LoggedInGuard>

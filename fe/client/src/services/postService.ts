@@ -15,7 +15,6 @@ export class PostService {
             method: "GET",
         }).then((res: any) => res.json()).then((data) => {
             const posts: POST[] = data.data.posts
-            console.log(posts)
             dispatch(getPost({ posts }))
         }).catch((err) => {
             dispatch(getPost({ posts: [] }))

@@ -19,10 +19,10 @@ const INIT_STATE: {
     error: null,
 }
 
-export const authReducer = (state = INIT_STATE, action: { type: AUTH_ACTIONS, payload?: USER }) => {
+export const authReducer = (state = INIT_STATE, action: { type: AUTH_ACTIONS, payload?: USER }): typeof INIT_STATE => {
     switch (action.type) {
         case AUTH_ACTIONS.LOGIN:
-            return { ...state, user: action.payload }
+            return { ...state, user: action.payload || null }
         case AUTH_ACTIONS.LOGOUT:
             return { ...state, user: null }
         default:

@@ -1,11 +1,13 @@
 .container {
-    height: 400px;
+    min-height: 100px;
     width: 500px;
     background: #f8f8fa;
+    padding: 5px;
 }
 
 .form > label {
     display: inline-block;
+    margin: 5px 0;
 }
 
 .form {

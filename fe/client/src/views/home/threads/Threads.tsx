@@ -8,7 +8,9 @@ import { ThreadService } from "../../../services/threadService";
 import { IRootState } from "../../../store/reducers";
 
 import { AddThreadForm } from "./addThreadForm/AddThreadForm";
-import { Button, Modal } from "../../../components"
+import { Modal } from "../../../components"
+
+import { Button } from "@mui/material"
 
 import style from "./Threads.module.css"
 
@@ -37,7 +39,7 @@ export const Threads = () => {
 
     return (
         <div className={style.container}>
-            <Button onClick={() => history.push('/')}>Powrót</Button>
+            <Button variant="contained" onClick={() => history.push('/')}>Powrót</Button>
 
             {
                 isModalVisible
@@ -54,7 +56,7 @@ export const Threads = () => {
                     <>
                         <h1>{name}</h1>
                         <LoggedInGuard>
-                            <Button onClick={addThread} >Dodaj wątek</Button>
+                            <Button variant="contained" onClick={addThread} >Dodaj wątek</Button>
                         </LoggedInGuard>
                         {threads.map((thread, index) => {
                             return <div key={index} className={`${style.tile} ${style['tile-clickable']}`} onClick={() => onTopicClickHandler(thread.threadId)} >

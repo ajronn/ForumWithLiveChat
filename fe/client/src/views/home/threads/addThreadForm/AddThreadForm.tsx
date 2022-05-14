@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux"
 
 import { ThreadService } from "../../../../services/threadService"
 
-import { Button } from "../../../../components"
+import { Button, Input, TextareaAutosize } from "@mui/material"
 
 import style from "./AddThreadForm.module.css"
 
@@ -46,22 +46,22 @@ export const AddThreadForm = (props: PROPS) => {
 
     return (
         <div className={style.container}>
-            <Button onClick={props.close}>x</Button>
+            <Button variant="contained" onClick={props.close}>Close</Button>
             <form className={style.form} >
                 <p>Dodaj wątek</p>
                 <label>
                     <p>Tytuł</p>
-                    <input onChange={(event) => setName(event.target.value)} />
+                    <Input onChange={(event) => setName(event.target.value)} />
                 </label>
                 <label>
                     <p>Opis</p>
-                    <input onChange={(event) => setDescription(event.target.value)} />
+                    <Input onChange={(event) => setDescription(event.target.value)} />
                 </label>
                 <label>
                     <p>Treść postu</p>
-                    <input onChange={(event) => setContent(event.target.value)} />
+                    <TextareaAutosize onChange={(event) => setContent(event.target.value)} style={{ width: '200px', resize: 'vertical', minHeight: '20px' }}></TextareaAutosize>
                 </label>
-                <Button onClick={addThread} >Dodaj</Button>
+                <Button variant="contained" onClick={addThread} >Dodaj</Button>
             </form>
         </div>
     )

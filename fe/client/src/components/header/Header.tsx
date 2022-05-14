@@ -6,14 +6,23 @@ import { AuthService } from "../../services/authService";
 import { LoggedInGuard, LoggedOutGuard } from "../../guards/authGuards"
 
 import { Logo } from "./logo/Logo"
-import { Avatar, Button } from ".."
 
 import style from "./Header.module.css"
 import { BACKGROUND } from "../../utils/index"
 
+import { Button } from "@mui/material"
+import { useSelector } from "react-redux";
+import { IRootState } from "../../store/reducers";
+
 export const Header = () => {
     const history = useHistory();
     const dispatch = useDispatch();
+
+    const { user } = useSelector((state: IRootState) => state.auth)
+
+    const formattedUserName = () => {
+        return user ? `Hi ${user.userName.split('@')[0]}!` : ''
+    }
 
     return (
         <div className={style.container}>
@@ -23,11 +32,11 @@ export const Header = () => {
                 </div>
                 <div className={style.right}>
                     <LoggedOutGuard>
-                        <Button onClick={() => history.push("/login")} >Zaloguj</Button>
+                        <Button variant="contained" onClick={() => history.push("/login")} >Zaloguj</Button>
                     </LoggedOutGuard>
                     <LoggedInGuard>
-                        <Avatar />
-                        <Button onClick={() => { AuthService.logout(dispatch) }} >Wyloguj</Button>
+                        <p className={style.userName}>{formattedUserName()}</p>
+                        <Button variant="contained" onClick={() => { AuthService.logout(dispatch) }} >Wyloguj</Button>
                     </LoggedInGuard>
                 </div>
             </div>

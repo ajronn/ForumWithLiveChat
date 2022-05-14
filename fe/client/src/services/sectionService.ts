@@ -13,7 +13,8 @@ export class SectionService {
             method: "GET",
         }).then((res: any) => res.json()).then((data) => {
             const sections: SECTION[] = data.data;
-            dispatch(getSections(sections))
+
+            dispatch(getSections(sections ? sections : []))
         }).catch((err) => {
             dispatch(getSections([]))
         })
