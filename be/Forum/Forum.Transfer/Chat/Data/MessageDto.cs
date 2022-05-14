@@ -5,6 +5,8 @@ namespace Forum.Transfer.Chat.Data
 {
     public class MessageDto
     {
+        public int MessageId { get; set; }
+
         public string UserId { get; set; }
         [Required]
         public string UserName { get; set; }
