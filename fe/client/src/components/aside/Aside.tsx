@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../store/reducers";
 import { USER } from "../../store/reducers/auth";
 import { Input } from "@mui/material";
+import { LoggedInGuard } from "../../guards/authGuards";
 
 type MESSAGE = {
     userId: string,
@@ -108,11 +109,13 @@ const Aside = () => {
 
     return (
         <div className={`${style.content} ${style["content-separate"]}`} style={{ gridArea: "b" }}>
-            <div className={style.chat} >
-                <p>Live chat</p>
-                <textarea className={style.messages} readOnly value={getMessages()} ref={(e) => { element = e; if (e) { e.scrollTop = e.scrollHeight } }} />
-                <Input placeholder="Type a message..." onChange={(e) => setMessage(e.target.value)} value={message} onKeyDown={(e) => onEnterClick(e.code)} />
-            </div>
+            <LoggedInGuard>
+                <div className={style.chat} >
+                    <p>Live chat</p>
+                    <textarea className={style.messages} readOnly value={getMessages()} ref={(e) => { element = e; if (e) { e.scrollTop = e.scrollHeight } }} />
+                    <Input placeholder="Type a message..." onChange={(e) => setMessage(e.target.value)} value={message} onKeyDown={(e) => onEnterClick(e.code)} />
+                </div>
+            </LoggedInGuard>
         </div>
     )
 }
