@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.Domain.Interface", "F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.Transfer", "Forum.Transfer\Forum.Transfer.csproj", "{2751F94E-58F2-4C9D-B528-826795EE8F1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.Handler", "Forum.Handler\Forum.Handler.csproj", "{AFD9D05E-617D-4E47-A7C9-A921E26615CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.Handler", "Forum.Handler\Forum.Handler.csproj", "{AFD9D05E-617D-4E47-A7C9-A921E26615CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.Test", "Forum.Test\Forum.Test.csproj", "{98B3E07D-2377-4215-B68E-A0924851ED75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{AFD9D05E-617D-4E47-A7C9-A921E26615CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFD9D05E-617D-4E47-A7C9-A921E26615CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFD9D05E-617D-4E47-A7C9-A921E26615CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98B3E07D-2377-4215-B68E-A0924851ED75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98B3E07D-2377-4215-B68E-A0924851ED75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98B3E07D-2377-4215-B68E-A0924851ED75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98B3E07D-2377-4215-B68E-A0924851ED75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
