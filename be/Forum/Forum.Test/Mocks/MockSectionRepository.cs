@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Forum.Data.Entities;
+﻿using System.Collections.Generic;
 using Forum.Domain.Interface.Repository;
 using Forum.Transfer.Section.Data;
 using Moq;
@@ -12,7 +7,7 @@ namespace Forum.Test.Mocks
 {
     public static class MockSectionRepository
     {
-        public static Mock<ISectionRepository> GetSectionRepository()
+        public static Mock<ISectionRepository> GetSectionListRepository()
         {
             var sections = new List<SectionDto>
             {
@@ -35,6 +30,19 @@ namespace Forum.Test.Mocks
 
             var mockRepo = new Mock<ISectionRepository>();
             mockRepo.Setup(r => r.GetSectionListAsync()).ReturnsAsync(sections);
+
+            return mockRepo;
+        }
+
+        public static Mock<ISectionRepository> GetSectionRepository()
+        {
+            var section = new SectionDto
+            {
+                SectionId = 1,
+                Name = "Sekcja 1"
+            };
+            var mockRepo = new Mock<ISectionRepository>();
+            mockRepo.Setup(x => x.GetSectionAsync(It.Is<int>(y => y == section.SectionId))).ReturnsAsync(section);
 
             return mockRepo;
         }

@@ -19,12 +19,12 @@ namespace Forum.Test.Section.Queries
         private readonly Mock<ISectionRepository> _mockRepo;
         public GetAllSectionsHandlerTests()
         {
-            _mockRepo = MockSectionRepository.GetSectionRepository();
+            _mockRepo = MockSectionRepository.GetSectionListRepository();
 
         }
 
         [Fact]
-        public async Task GetSectionListTest()
+        public async Task Get_Section_List_Test()
         {
             var handler = new SectionQueryHandler(_mockRepo.Object);
 

@@ -22,8 +22,4 @@
     <ProjectReference Include="..\Forum.Web\Forum.Web.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Section\Commands\" />
-  </ItemGroup>
-
 </Project>
