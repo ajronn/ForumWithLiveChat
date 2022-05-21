@@ -38,7 +38,7 @@ namespace Forum.Domain.Implementation.Repository
 
         public async Task<List<PostDto>> GetPostListAsync()
         {
-            var posts = await _context.Posts
+            var posts = await _context.Posts.Include(x=>x.User)
                 .ToListAsync();
 
             return _mapper.Map<List<PostDto>>(posts);
@@ -46,7 +46,7 @@ namespace Forum.Domain.Implementation.Repository
 
         public async Task<PostDto> GetPostAsync(int postId)
         {
-            var post = await _context.Posts
+            var post = await _context.Posts.Include(x => x.User)
                 .Where(x => x.PostId == postId)
                 .FirstOrDefaultAsync();
 

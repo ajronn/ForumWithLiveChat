@@ -41,6 +41,7 @@ namespace Forum.Domain.Implementation.Repository
         {
             var threads = await _context.Threads
                 .Include(x => x.Posts)
+                .ThenInclude(x=>x.User)
                 .ToListAsync();
 
             return _mapper.Map<List<ThreadDto>>(threads);
@@ -50,6 +51,7 @@ namespace Forum.Domain.Implementation.Repository
         {
             var thread = await _context.Threads
                 .Include(x => x.Posts)
+                .ThenInclude(x => x.User)
                 .Where(x => x.ThreadId == threadId)
                 .FirstOrDefaultAsync();
 

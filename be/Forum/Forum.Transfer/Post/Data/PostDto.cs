@@ -16,7 +16,7 @@ namespace Forum.Transfer.Post.Data
 
         public string UserId { get; set; }
 
-        public UserDto User { get; set; }
+        public UserBasicDto User { get; set; }
 
         public int ThreadId { get; set; }
 
