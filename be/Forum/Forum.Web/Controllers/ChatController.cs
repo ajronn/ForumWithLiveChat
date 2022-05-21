@@ -26,12 +26,12 @@ namespace Forum.Web.Controllers
 
         [AllowAnonymous]
         [HttpGet(ApiRoutes.Message.GetList)]
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List([FromQuery] GetAllMessagesQuery query)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var result = await _mediator.Send(new GetAllMessagesQuery());
+            var result = await _mediator.Send(new GetAllMessagesQuery(query));
 
             return Ok(result.ToResponseDto());
         }

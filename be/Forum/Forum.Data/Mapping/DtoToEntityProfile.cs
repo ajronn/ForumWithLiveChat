@@ -1,9 +1,11 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using Forum.Data.Entities;
 using Forum.Transfer.Chat;
 using Forum.Transfer.Chat.Data;
 using Forum.Transfer.Post.Data;
 using Forum.Transfer.Section.Data;
+using Forum.Transfer.Shared;
 using Forum.Transfer.Subsection.Data;
 using Forum.Transfer.Thread.Data;
 using Forum.Transfer.User.Command;
@@ -24,6 +26,7 @@ namespace Forum.Data.Mapping
             CreateMap<CreateUserCommand, User>().ForMember(user => user.UserName,
                 map => map.MapFrom(dto => dto.Email));
             CreateMap<Message, MessageDto>().ReverseMap();
+            CreateMap<PageListDto<MessageDto>, PageListDto<Message>>().ReverseMap();
         }
     }
 }
