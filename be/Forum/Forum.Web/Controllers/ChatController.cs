@@ -7,12 +7,14 @@ using Forum.Transfer.Chat.Query;
 using Forum.Transfer.Shared;
 using Forum.Web.Infrastructure;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Forum.Web.Controllers
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ChatController : ControllerBase
     {
         private readonly IMediator _mediator;

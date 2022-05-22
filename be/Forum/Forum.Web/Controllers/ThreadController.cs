@@ -59,6 +59,7 @@ namespace Forum.Web.Controllers
             return Ok(result.ToResponseDto());
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPut(ApiRoutes.Thread.Update)]
         public async Task<IActionResult> Update([FromBody] UpdateThreadCommand command)
         {
@@ -70,6 +71,7 @@ namespace Forum.Web.Controllers
             return Ok(result.ToResponseDto());
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpDelete(ApiRoutes.Thread.Delete)]
         public async Task<IActionResult> Delete([FromBody] DeleteThreadCommand command)
         {

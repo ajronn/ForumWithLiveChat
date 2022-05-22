@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Forum.Web.Controllers
 {
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
     public class SectionController : ControllerBase
     {
         private readonly IMediator _mediator;

@@ -40,19 +40,19 @@ namespace Forum.Domain.Implementation.Repository
 
         public async Task<List<UserBasicDto>> GetUserListAsync()
         {
-            var posts = await _context.Users
+            var users = await _context.Users
                 .ToListAsync();
 
-            return _mapper.Map<List<UserBasicDto>>(posts);
+            return _mapper.Map<List<UserBasicDto>>(users);
         }
 
         public async Task<UserDto> GetUserAsync(string userId)
         {
-            var post = await _context.Users
+            var user = await _context.Users
                 .Where(x => x.Id == userId)
                 .FirstOrDefaultAsync();
 
-            return _mapper.Map<UserDto>(post);
+            return _mapper.Map<UserDto>(user);
         }
     }
 }
