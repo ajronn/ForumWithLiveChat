@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Forum.Transfer.Post.Query;
 using Forum.Transfer.Shared;
 using Forum.Transfer.User.Command;
 using Forum.Transfer.User.Query;
