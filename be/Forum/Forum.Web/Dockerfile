@@ -12,6 +12,7 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["Forum.Web/Forum.Web.csproj", "Forum.Web/"]
 COPY ["Forum.Transfer/Forum.Transfer.csproj", "Forum.Transfer/"]
+COPY ["Forum.Scheduling/Forum.Scheduling.csproj", "Forum.Scheduling/"]
 COPY ["Forum.Core/Forum.Core.csproj", "Forum.Core/"]
 COPY ["Forum.Handler/Forum.Handler.csproj", "Forum.Handler/"]
 COPY ["Forum.Domain.Implementation/Forum.Domain.Implementation.csproj", "Forum.Domain.Implementation/"]

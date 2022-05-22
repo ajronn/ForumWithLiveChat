@@ -46,7 +46,7 @@ namespace Forum.Domain.Implementation.Service
         {
             var user = _mapper.Map<User>(command);
             user.UserName = command.UserName;
-            user.IsActive = false;
+            user.IsActive = true;
             user.IsArchival = false;
 
             if (await _userManager.FindByEmailAsync(command.Email) != null)

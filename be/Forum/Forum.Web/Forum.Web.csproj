@@ -20,6 +20,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
+    <PackageReference Include="Quartz" Version="3.4.0" />
+    <PackageReference Include="Quartz.AspNetCore" Version="3.4.0" />
+    <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.4.0" />
+    <PackageReference Include="Quartz.Serialization.Json" Version="3.4.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
   </ItemGroup>
@@ -30,6 +34,7 @@
     <ProjectReference Include="..\Forum.Domain.Implementation\Forum.Domain.Implementation.csproj" />
     <ProjectReference Include="..\Forum.Domain.Interface\Forum.Domain.Interface.csproj" />
     <ProjectReference Include="..\Forum.Handler\Forum.Handler.csproj" />
+    <ProjectReference Include="..\Forum.Scheduling\Forum.Scheduling.csproj" />
     <ProjectReference Include="..\Forum.Transfer\Forum.Transfer.csproj" />
   </ItemGroup>
 
