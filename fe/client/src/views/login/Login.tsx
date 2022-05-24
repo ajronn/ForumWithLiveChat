@@ -26,9 +26,7 @@ export const Login = () => {
 
     const login = () => {
         if (payload.email && payload.password) {
-            AuthService.login(dispatch, payload).finally(() => {
-                //  window.location.reload()
-            })
+            AuthService.login(dispatch, payload)
         }
     }
 

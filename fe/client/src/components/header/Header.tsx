@@ -13,6 +13,7 @@ import { BACKGROUND } from "../../utils/index"
 import { Button } from "@mui/material"
 import { useSelector } from "react-redux";
 import { IRootState } from "../../store/reducers";
+import { makeUserNameFromEmail } from "../../tools";
 
 export const Header = () => {
     const history = useHistory();
@@ -21,7 +22,7 @@ export const Header = () => {
     const { user } = useSelector((state: IRootState) => state.auth)
 
     const formattedUserName = () => {
-        return user ? `Hi ${user.userName.split('@')[0]}!` : ''
+        return user ? `Hi ${makeUserNameFromEmail(user.userName)}!` : ''
     }
 
     return (

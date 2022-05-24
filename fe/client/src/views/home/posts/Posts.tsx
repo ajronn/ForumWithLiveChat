@@ -9,6 +9,7 @@ import { IRootState } from "../../../store/reducers";
 import style from "./Posts.module.css"
 
 import { Button, Input } from "@mui/material"
+import { formatDate } from "../../../tools";
 
 export const Posts = () => {
     const [form, setForm] = useState<string>('')
@@ -19,19 +20,6 @@ export const Posts = () => {
     useEffect(() => {
         PostService.get(dispatch, id)
     }, [])
-    const formatDate = (date: Date) => {
-        const d = new Date(date)
-        const day = d.getDate()
-        const formattedDay = day < 10 ? `0${day}` : day
-        const month = d.getMonth() + 1
-        const formattedMonth = month < 10 ? `0${month}` : month
-        const year = d.getFullYear()
-        const hour = d.getHours()
-        const formattedHour = hour < 10 ? `0${hour}` : hour
-        const minute = d.getMinutes()
-        const formattedMinute = minute < 10 ? `0${minute}` : minute
-        return `${formattedDay}.${formattedMonth}.${year} ${formattedHour}:${formattedMinute}`
-    }
 
     const setContent = (content: string) => setForm(content)
 
@@ -45,7 +33,7 @@ export const Posts = () => {
 
     return (
         <div className={style.container}>
-            <button onClick={() => history.push(`/thread/${thread}`)}>Powrót</button>
+            <Button variant="contained" onClick={() => history.push(`/thread/${thread}`)}>Powrót</Button>
             {data.map((post, index) => {
                 return (
                     <div key={index + "post"} className={style.post}>

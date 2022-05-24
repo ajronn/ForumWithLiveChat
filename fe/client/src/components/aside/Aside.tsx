@@ -7,6 +7,7 @@ import { IRootState } from "../../store/reducers";
 import { USER } from "../../store/reducers/auth";
 import { Input } from "@mui/material";
 import { LoggedInGuard } from "../../guards/authGuards";
+import { makeUserNameFromEmail } from "../../tools";
 
 type MESSAGE = {
     userId: string,
@@ -92,13 +93,13 @@ const Aside = () => {
     const getMessages = () => {
         let result = ''
         chat.forEach((m) => {
-            result += m.content + '\n'
+            result += `${makeUserNameFromEmail(m.userName)}: ${m.content}\n`
         })
         return result
     }
 
     const onEnterClick = (code: string) => {
-        if (code === 'Enter') {
+        if (code === 'Enter' && message) {
             sendMessage(message)
             setMessage('')
             if (element) {

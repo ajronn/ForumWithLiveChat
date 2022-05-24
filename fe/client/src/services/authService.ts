@@ -8,6 +8,12 @@ export type LOGIN_PAYLOAD = {
     rememberMe: boolean
 }
 
+export type REGISTER_PAYLOAD = {
+    email: string,
+    userName: string,
+    password: string
+}
+
 export class AuthService {
     static async login(dispatch: Dispatch<AnyAction>, payload: LOGIN_PAYLOAD) {
         await fetch(`${process.env.REACT_APP_DOMAIN}/api/user/login`, {
@@ -25,6 +31,19 @@ export class AuthService {
             dispatch(log_in(undefined))
         })
     }
+
+    static async register(dispatch: Dispatch<AnyAction>, payload: REGISTER_PAYLOAD) {
+        await fetch(`${process.env.REACT_APP_DOMAIN}/api/user/register`, {
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': "http://localhost:3000"
+            },
+            method: "POST",
+            body: JSON.stringify(payload)
+        })
+    }
+
     static logout(dispatch: Dispatch<AnyAction>) {
         dispatch(log_out())
     }
