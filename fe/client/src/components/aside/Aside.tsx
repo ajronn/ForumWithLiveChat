@@ -50,16 +50,21 @@ const Aside = () => {
     }, [])
 
     const getChat = async () => {
-        await fetch(`${process.env.REACT_APP_DOMAIN}/api/message/list`, {
+        const t = JSON.parse(window.sessionStorage.getItem('token') || '')
+        await fetch(`${process.env.REACT_APP_DOMAIN}/api/message/list?` + new URLSearchParams({
+            Page: '0',
+            PageSize: '50',
+        }), {
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': "http://localhost:3000"
+                'Access-Control-Allow-Origin': "http://localhost:3000",
+                'Authorization': `bearer ${t}`,
             },
             method: "GET",
         }).then((res: any) => res.json()).then((res) => {
             const { data } = res;
-            setChat(data)
+            setChat(data.items)
         })
     }
 
@@ -75,12 +80,14 @@ const Aside = () => {
         };
 
         try {
+            const t = JSON.parse(window.sessionStorage.getItem('token') || '')
             await fetch(`${process.env.REACT_APP_DOMAIN}/api/message/create`, {
                 method: 'POST',
                 mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': "http://localhost:3000"
+                    'Access-Control-Allow-Origin': "http://localhost:3000",
+                    'Authorization': `bearer ${t}`,
                 },
                 body: JSON.stringify(chatMessage),
             })
@@ -92,9 +99,11 @@ const Aside = () => {
 
     const getMessages = () => {
         let result = ''
-        chat.forEach((m) => {
-            result += `${makeUserNameFromEmail(m.userName)}: ${m.content}\n`
-        })
+        try {
+            chat.forEach((m) => {
+                result += `${makeUserNameFromEmail(m.userName)}: ${m.content}\n`
+            })
+        } catch (err) { }
         return result
     }
 

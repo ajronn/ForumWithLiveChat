@@ -38,7 +38,7 @@ export const Posts = () => {
                 return (
                     <div key={index + "post"} className={style.post}>
                         <div className={`${style.column} ${style.author}`}>
-                            {post.user}
+                            {/* {post.user} */}
                         </div>
                         <div className={style.column}>
                             <p className={style.date}>{formatDate(post.createdAt)}</p>

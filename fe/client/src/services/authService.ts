@@ -25,6 +25,7 @@ export class AuthService {
             method: "POST",
             body: JSON.stringify(payload)
         }).then((res: any) => res.json()).then((data) => {
+            window.sessionStorage.setItem('token', JSON.stringify(data.data.token))
             const user: USER = data.data.user
             dispatch(log_in(user))
         }).catch((err) => {
