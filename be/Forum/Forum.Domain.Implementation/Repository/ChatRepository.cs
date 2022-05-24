@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Forum.Core;
 using Forum.Core.Enums;
 using Forum.Data;
+using Forum.Domain.Implementation.Extensions;
 using Forum.Domain.Interface.Repository;
 using Forum.Transfer.Chat.Data;
+using Forum.Transfer.Chat.Query;
+using Forum.Transfer.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace Forum.Domain.Implementation.Repository
@@ -36,12 +38,12 @@ namespace Forum.Domain.Implementation.Repository
             }
         }
 
-        public async Task<List<MessageDto>> GetMessageListAsync()
+        public async Task<PageListDto<MessageDto>> GetMessageListAsync(GetAllMessagesQuery query)
         {
             var messages = await _context.Messages
-                .ToListAsync();
+                .ToPagedListAsync(query);
 
-            return _mapper.Map<List<MessageDto>>(messages);
+            return _mapper.Map<PageListDto<MessageDto>>(messages);
         }
 
         public async Task<MessageDto> GetMessageAsync(int messageId)

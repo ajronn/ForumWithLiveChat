@@ -7,12 +7,14 @@ using Forum.Transfer.Chat.Query;
 using Forum.Transfer.Shared;
 using Forum.Web.Infrastructure;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Forum.Web.Controllers
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ChatController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -26,12 +28,12 @@ namespace Forum.Web.Controllers
 
         [AllowAnonymous]
         [HttpGet(ApiRoutes.Message.GetList)]
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List([FromQuery] GetAllMessagesQuery query)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var result = await _mediator.Send(new GetAllMessagesQuery());
+            var result = await _mediator.Send(new GetAllMessagesQuery(query));
 
             return Ok(result.ToResponseDto());
         }

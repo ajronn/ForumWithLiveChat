@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -28,21 +29,24 @@ namespace Forum.Domain.Implementation.Service
         private readonly UserManager<User> _userManager;
         private readonly JwtSettings _jwtSettings;
         private readonly IUserRepository _userRepository;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public UserService(ForumDbContext context, IMapper mapper, UserManager<User> userManager,
-            IOptions<JwtSettings> jwtSettings)
+            IOptions<JwtSettings> jwtSettings, IUserRepository userRepository, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _mapper = mapper;
             _userManager = userManager;
             _jwtSettings = jwtSettings.Value;
+            _userRepository = userRepository;
+            _roleManager = roleManager;
         }
 
         public async Task<UserBasicDto> CreateAsync(CreateUserCommand command)
         {
             var user = _mapper.Map<User>(command);
             user.UserName = command.UserName;
-            user.IsActive = false;
+            user.IsActive = true;
             user.IsArchival = false;
 
             if (await _userManager.FindByEmailAsync(command.Email) != null)
@@ -58,6 +62,8 @@ namespace Forum.Domain.Implementation.Service
             }
 
             var result = await _userManager.CreateAsync(user, command.Password);
+
+            await _userManager.AddToRoleAsync(user, "Użytkownik");
 
             if (!result.Succeeded)
             {
@@ -103,24 +109,19 @@ namespace Forum.Domain.Implementation.Service
 
             return new SessionDto
             {
-                Token = GenerateSessionTokenForUser(user),
+                Token = await GenerateSessionTokenForUser(user),
                 User = _mapper.Map<UserBasicDto>(user)
             };
         }
 
-        private string GenerateSessionTokenForUser(User user)
+        private async Task<string> GenerateSessionTokenForUser(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey);
+            var claims = await GetAllValidClaims(user);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                    new Claim("id", user.Id)
-                }),
+                Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
@@ -128,6 +129,40 @@ namespace Forum.Domain.Implementation.Service
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
+        }
+
+        private async Task<List<Claim>> GetAllValidClaims(User user)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim("id", user.Id)
+            };
+
+            var userClaims = await _userManager.GetClaimsAsync(user);
+            claims.AddRange(userClaims);
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            foreach (var userRole in userRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, userRole));
+
+                var role = await _roleManager.FindByNameAsync(userRole);
+
+                if (role != null)
+                {
+                    var roleClaims = await _roleManager.GetClaimsAsync(role);
+                    foreach (var roleClaim in roleClaims)
+                    {
+                        claims.Add(roleClaim);
+                    }
+                }
+            }
+
+            return claims;
         }
 
         public async Task<UserBasicDto> ActivateAsync(ActivateUserCommand command)

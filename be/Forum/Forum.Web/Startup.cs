@@ -82,6 +82,7 @@ namespace Forum.Web
             services.AddScoped<IThreadRepository, ThreadRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IChatRepository, ChatRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISectionService, SectionService>();
@@ -89,6 +90,7 @@ namespace Forum.Web
             services.AddScoped<IThreadService, ThreadService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<IChatService, ChatService>();
+            services.AddScoped<IRoleService, RoleService>();
 
             services.RegisterRequestHandlers();
             services.RegisterMapping();

@@ -16,6 +16,8 @@
         IncorrectPassword,
         ValidatePasswordFailed,
         ChangePasswordFailed,
-        MessageNotFound
+        MessageNotFound,
+        RoleNotFound,
+        RoleCannotBeChanged
     }
 }

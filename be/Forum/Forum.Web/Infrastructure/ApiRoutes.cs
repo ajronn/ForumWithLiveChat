@@ -65,5 +65,14 @@ namespace Forum.Web.Infrastructure
             public const string Get = Root + "/message/get";
             public const string Create = Root + "/message/create";
         }
+
+        public static class Role
+        {
+            public const string GetList = Root + "/role/list";
+            public const string Get = Root + "/role/get";
+            public const string Create = Root + "/role/create";
+            public const string Update = Root + "/role/update";
+            public const string Delete = Root + "/role/delete";
+        }
     }
 }

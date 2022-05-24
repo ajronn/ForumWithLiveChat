@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.Transfer", "Forum.Tra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.Handler", "Forum.Handler\Forum.Handler.csproj", "{AFD9D05E-617D-4E47-A7C9-A921E26615CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.Test", "Forum.Test\Forum.Test.csproj", "{98B3E07D-2377-4215-B68E-A0924851ED75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.Test", "Forum.Test\Forum.Test.csproj", "{98B3E07D-2377-4215-B68E-A0924851ED75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.Scheduling", "Forum.Scheduling\Forum.Scheduling.csproj", "{A1B9B61A-B2C0-4366-9936-688A71DA09B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{98B3E07D-2377-4215-B68E-A0924851ED75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98B3E07D-2377-4215-B68E-A0924851ED75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98B3E07D-2377-4215-B68E-A0924851ED75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B9B61A-B2C0-4366-9936-688A71DA09B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B9B61A-B2C0-4366-9936-688A71DA09B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B9B61A-B2C0-4366-9936-688A71DA09B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B9B61A-B2C0-4366-9936-688A71DA09B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
