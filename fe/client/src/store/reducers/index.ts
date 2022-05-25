@@ -6,7 +6,7 @@ import { postReducer } from "./post"
 
 export const combinedReducers = combineReducers({
     auth: authReducer,
-    sections: sectionReducer,
+    section: sectionReducer,
     thread: threadReducer,
     post: postReducer,
 })

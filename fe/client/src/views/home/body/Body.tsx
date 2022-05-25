@@ -11,7 +11,7 @@ import style from "./Body.module.css"
 export const Body = () => {
     const history = useHistory();
 
-    const { sections } = useSelector((state: IRootState) => state.sections)
+    const { sections } = useSelector((state: IRootState) => state.section)
 
     return (
         <div className={style.content} style={{ gridArea: "a" }}>
