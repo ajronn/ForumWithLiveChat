@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import { IRootState } from "../../store/reducers";
 import { USER } from "../../store/reducers/auth";
 import { Input } from "@mui/material";
-import { LoggedInGuard } from "../../guards/authGuards";
 import { makeUserNameFromEmail } from "../../tools";
+import Picker from 'emoji-picker-react';
 
 type MESSAGE = {
     userId: string,
@@ -17,10 +17,15 @@ type MESSAGE = {
 
 const Aside = () => {
     const [chat, setChat] = useState<MESSAGE[]>([]);
+    const [chosenEmoji, setChosenEmoji] = useState<any>(null);
     const [message, setMessage] = useState<string>('');
     const latestChat = useRef(null);
     const { user } = useSelector((state: IRootState) => state.auth)
     let element: HTMLTextAreaElement | null = null
+
+    const onEmojiClick = (event: any, emojiObject: any) => {
+        setMessage(message + emojiObject.emoji);
+    };
 
     //@ts-ignore
     latestChat.current = chat;
@@ -123,6 +128,7 @@ const Aside = () => {
                     <Input placeholder="Type a message..." onChange={(e) => setMessage(e.target.value)} value={message} onKeyDown={(e) => onEnterClick(e.code)} />
                 </div>
             </div>
+            <Picker onEmojiClick={onEmojiClick} />
         </div>
     )
 }

@@ -19,6 +19,7 @@
     "@types/react-test-renderer": "^18.0.0",
     "axios": "^0.26.1",
     "dotenv": "^16.0.0",
+    "emoji-picker-react": "^3.5.1",
     "jest": "^28.1.0",
     "openssl": "^2.0.0",
     "react": "^17.0.2",
