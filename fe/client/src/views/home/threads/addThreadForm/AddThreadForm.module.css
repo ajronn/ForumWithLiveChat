@@ -5,13 +5,37 @@
     padding: 5px;
 }
 
-.form > label {
-    display: inline-block;
-    margin: 5px 0;
-}
-
 .form {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.button > * {
+    background-color: #439792 !important;
+}
+.button > *:hover {
+    background-color: #4aa59f !important;
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+}
+
+.formContent {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.control {
+    margin: 10px;
+    display: block;
+}
+
+.multiLine > * {
+    width: 100%;
+    resize: none;
+    min-height: 50px;
 }

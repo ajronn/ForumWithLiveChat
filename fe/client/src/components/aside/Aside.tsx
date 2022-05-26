@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import style from "./Aside.module.css"
 import { HubConnectionBuilder } from '@microsoft/signalr';
-import { SectionService } from "../../services/sectionService";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { IRootState } from "../../store/reducers";
 import { USER } from "../../store/reducers/auth";
 import { Input } from "@mui/material";
@@ -20,7 +19,6 @@ const Aside = () => {
     const [chat, setChat] = useState<MESSAGE[]>([]);
     const [message, setMessage] = useState<string>('');
     const latestChat = useRef(null);
-    const dispatch = useDispatch();
     const { user } = useSelector((state: IRootState) => state.auth)
     let element: HTMLTextAreaElement | null = null
 
@@ -28,7 +26,6 @@ const Aside = () => {
     latestChat.current = chat;
     useEffect(() => {
         getChat()
-        SectionService.get(dispatch)
 
         const connection = new HubConnectionBuilder()
             .withUrl(`${process.env.REACT_APP_DOMAIN}/chat`)
@@ -108,7 +105,7 @@ const Aside = () => {
     }
 
     const onEnterClick = (code: string) => {
-        if (code === 'Enter' && message) {
+        if ((code === 'Enter' || code === 'NumpadEnter') && message) {
             sendMessage(message)
             setMessage('')
             if (element) {
@@ -118,14 +115,14 @@ const Aside = () => {
     }
 
     return (
-        <div className={`${style.content} ${style["content-separate"]}`} style={{ gridArea: "b" }}>
-            <LoggedInGuard>
-                <div className={style.chat} >
-                    <p>Live chat</p>
-                    <textarea className={style.messages} readOnly value={getMessages()} ref={(e) => { element = e; if (e) { e.scrollTop = e.scrollHeight } }} />
+        <div className={style.content}>
+            <div className={style.chat} >
+                <p>Live chat</p>
+                <textarea className={style.messages} readOnly value={getMessages()} ref={(e) => { element = e; if (e) { e.scrollTop = e.scrollHeight } }} />
+                <div className={style.send}>
                     <Input placeholder="Type a message..." onChange={(e) => setMessage(e.target.value)} value={message} onKeyDown={(e) => onEnterClick(e.code)} />
                 </div>
-            </LoggedInGuard>
+            </div>
         </div>
     )
 }

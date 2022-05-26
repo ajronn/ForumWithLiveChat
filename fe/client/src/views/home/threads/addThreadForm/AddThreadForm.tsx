@@ -46,23 +46,33 @@ export const AddThreadForm = (props: PROPS) => {
 
     return (
         <div className={style.container}>
-            <Button variant="contained" onClick={props.close}>Close</Button>
-            <form className={style.form} >
-                <p>Dodaj wątek</p>
-                <label>
-                    <p>Tytuł</p>
-                    <Input onChange={(event) => setName(event.target.value)} />
-                </label>
-                <label>
-                    <p>Opis</p>
-                    <Input onChange={(event) => setDescription(event.target.value)} />
-                </label>
-                <label>
-                    <p>Treść postu</p>
-                    <TextareaAutosize onChange={(event) => setContent(event.target.value)} style={{ width: '200px', resize: 'vertical', minHeight: '20px' }}></TextareaAutosize>
-                </label>
-                <Button variant="contained" onClick={addThread} >Dodaj</Button>
-            </form>
+            <div className={style.button} >
+                <Button variant="contained" onClick={props.close}>Close</Button>
+            </div>
+            <div className={style.form} >
+                <div className={style.title} >
+                    <p>Dodaj wątek</p>
+                </div>
+                <div className={style.formContent}>
+                    <label className={style.control}>
+                        <p>Tytuł</p>
+                        <Input onChange={(event) => setName(event.target.value)} />
+                    </label>
+                    <label className={style.control}>
+                        <p>Opis</p>
+                        <Input onChange={(event) => setDescription(event.target.value)} />
+                    </label>
+                    <label className={style.control}>
+                        <p>Treść postu</p>
+                        <div className={style.multiLine} >
+                            <TextareaAutosize onChange={(event) => setContent(event.target.value)}></TextareaAutosize>
+                        </div>
+                    </label>
+                </div>
+                <div className={style.button} >
+                    <Button variant="contained" onClick={addThread} >Dodaj</Button>
+                </div>
+            </div>
         </div>
     )
 }

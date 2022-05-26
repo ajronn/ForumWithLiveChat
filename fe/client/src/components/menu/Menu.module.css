@@ -1,0 +1,57 @@
+.container {
+    width: 300px;
+    height: 100vh;
+    background-color: #4eb3ac;
+    position: relative;
+}
+
+.header {
+    padding: 10px;
+    box-shadow: 0 4px 20px -2px black;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #439792;
+    margin-right: 10px;
+    color: #ffffff;
+    box-shadow: 0 4px 20px -2px black;
+    font-style: normal;
+}
+
+.user, .login {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+}
+
+.login > * {
+    color: #ffffff !important;
+}
+
+.logout {
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.logout > * {
+    background-color: #439792 !important;
+}
+.logout > *:hover {
+    background-color: #4aa59f !important;
+}

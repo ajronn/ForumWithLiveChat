@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
@@ -8,15 +8,17 @@ import { ThreadService } from "../../../services/threadService";
 import { IRootState } from "../../../store/reducers";
 
 import { AddThreadForm } from "./addThreadForm/AddThreadForm";
-import { Modal } from "../../../components"
+import { Modal, SubSection } from "../../../components"
 
-import { Button } from "@mui/material"
+import { Button, Input } from "@mui/material"
+import SearchIcon from '@mui/icons-material/Search';
 
 import style from "./Threads.module.css"
 
 export const Threads = () => {
     const dispatch = useDispatch()
     const history = useHistory();
+    const [search, setSearch] = useState<string>('');
     const { threads, name } = useSelector((state: IRootState) => state.thread)
     const { id } = useParams<{ id: string }>();
     const [isModalVisible, setIsModalVisible] = useState(false)
@@ -37,10 +39,40 @@ export const Threads = () => {
         setIsModalVisible(false)
     }
 
-    return (
-        <div className={style.container}>
-            <Button variant="contained" onClick={() => history.push('/')}>Powrót</Button>
+    const threadsRender = useMemo(() => {
+        return threads.filter((t) => t.name.toLowerCase().includes(search))
+    }, [threads, search])
 
+    return (
+        <div className={style.content}>
+            <div className={style.header} >
+                Wątki - {name}
+                <div className={style.search} >
+                    <SearchIcon fontSize="large" />
+                    <Input onChange={(e) => setSearch(e.target.value)} />
+                </div>
+            </div>
+            <div className={style.buttons} >
+                <div className={style.button}>
+                    <Button onClick={() => history.push('/')}>Powrót</Button>
+                </div>
+                <LoggedInGuard>
+                    <div className={style.button}>
+                        <Button onClick={addThread}>Dodaj wątek</Button>
+                    </div>
+                </LoggedInGuard>
+            </div>
+            {
+                threads.length === 0
+                    ?
+                    <p className={style.none}>Brak wątków</p>
+                    :
+                    <div className={style.threads} >
+                        {threadsRender.map((thread, index) => {
+                            return <div key={index} onClick={() => onTopicClickHandler(thread.threadId)} ><SubSection name={thread.name} description='' /></div>
+                        })}
+                    </div>
+            }
             {
                 isModalVisible
                     ?
@@ -49,23 +81,6 @@ export const Threads = () => {
                     </Modal>
                     :
                     ''
-            }
-            {
-                threads.length !== 0
-                    ?
-                    <>
-                        <h1>{name}</h1>
-                        <LoggedInGuard>
-                            <Button variant="contained" onClick={addThread} >Dodaj wątek</Button>
-                        </LoggedInGuard>
-                        {threads.map((thread, index) => {
-                            return <div key={index} className={`${style.tile} ${style['tile-clickable']}`} onClick={() => onTopicClickHandler(thread.threadId)} >
-                                {thread.name}
-                            </div>
-                        })}
-                    </>
-                    :
-                    <h1>Brak wątków</h1>
             }
         </div>
     )

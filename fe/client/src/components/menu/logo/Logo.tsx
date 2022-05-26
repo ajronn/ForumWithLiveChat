@@ -7,7 +7,7 @@ export const Logo = () => {
 
     return (
         <div className={style.logo} onClick={() => history.push('/')}>
-            ForumWithLiveChat
+            Forum
         </div>
     )
 }
