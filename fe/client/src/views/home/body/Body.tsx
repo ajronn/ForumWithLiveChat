@@ -46,7 +46,7 @@ export const Body = () => {
                                     <div
                                         key={index + 'bodysubsection'}
                                         className={`${style.clickable}`}
-                                        onClick={() => history.push(`/thread/${subsection.sectionId}`)}>
+                                        onClick={() => history.push(`/thread/${subsection.subsectionId}`)}>
                                         <SubSection
                                             name={subsection.name}
                                             description={subsection.description} />

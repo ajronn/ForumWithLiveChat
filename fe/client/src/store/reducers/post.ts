@@ -5,7 +5,7 @@ export type POST = {
     postId: number,
     content: string,
     createdAt: Date,
-    editedAt: Date,
+    editedAt: Date | null,
     userId: string,
     user: USER,
     threadId: number

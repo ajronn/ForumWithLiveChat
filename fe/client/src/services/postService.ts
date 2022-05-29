@@ -16,7 +16,6 @@ export class PostService {
         }).then((res: any) => res.json()).then((data) => {
 
             const posts: POST[] = data.data.posts
-            console.log(posts)
             dispatch(getPost({ posts }))
         }).catch((err) => {
             dispatch(getPost({ posts: [] }))
@@ -36,6 +35,38 @@ export class PostService {
             body: JSON.stringify({
                 content,
                 threadId: id
+            })
+        })
+    }
+
+    static async edit(content: string, id: number) {
+        const t = JSON.parse(window.sessionStorage.getItem('token') || '')
+        await fetch(`${process.env.REACT_APP_DOMAIN}/api/post/update`, {
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': "http://localhost:3000",
+                'Authorization': `bearer ${t}`,
+            },
+            method: "PUT",
+            body: JSON.stringify({
+                content,
+                postId: id
+            })
+        })
+    }
+    static async delete(id: number) {
+        const t = JSON.parse(window.sessionStorage.getItem('token') || '')
+        await fetch(`${process.env.REACT_APP_DOMAIN}/api/post/delete`, {
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': "http://localhost:3000",
+                'Authorization': `bearer ${t}`,
+            },
+            method: "DELETE",
+            body: JSON.stringify({
+                postId: id
             })
         })
     }

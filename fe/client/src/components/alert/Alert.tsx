@@ -43,7 +43,11 @@ export const Alert = (props: Props) => {
     return (
         <div className={`${style.alert} ${selectType()}`}>
             <div className={style.center}><img src={selectImage()} height={23} width={23} alt="" /></div>
-            <div className={style.center}>{props.message}{props.id}</div>
+            <div className={style.center}>
+                <div className={`${props.message.split('\n').length > 2 ? style.space : ''}`} >
+                    {props.message.split('\n').map((msg) => <p key={msg} >{msg}</p>)}
+                </div>
+            </div>
             <div className={style.close} onClick={() => { props.close() }}><img src={CloseImg} alt="" height={10} /></div>
         </div>
     )

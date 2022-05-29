@@ -1,6 +1,5 @@
 import { AnyAction, Dispatch } from "redux"
-import { login as log_in, logout as log_out } from "../store/actions/auth"
-import { USER } from "../store/reducers/auth"
+import { logout as log_out } from "../store/actions/auth"
 
 export type LOGIN_PAYLOAD = {
     email: string,
@@ -16,7 +15,7 @@ export type REGISTER_PAYLOAD = {
 
 export class AuthService {
     static async login(dispatch: Dispatch<AnyAction>, payload: LOGIN_PAYLOAD) {
-        await fetch(`${process.env.REACT_APP_DOMAIN}/api/user/login`, {
+        return await fetch(`${process.env.REACT_APP_DOMAIN}/api/user/login`, {
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
@@ -24,17 +23,11 @@ export class AuthService {
             },
             method: "POST",
             body: JSON.stringify(payload)
-        }).then((res: any) => res.json()).then((data) => {
-            window.sessionStorage.setItem('token', JSON.stringify(data.data.token))
-            const user: USER = data.data.user
-            dispatch(log_in(user))
-        }).catch((err) => {
-            dispatch(log_in(undefined))
         })
     }
 
-    static async register(dispatch: Dispatch<AnyAction>, payload: REGISTER_PAYLOAD) {
-        await fetch(`${process.env.REACT_APP_DOMAIN}/api/user/register`, {
+    static async register(payload: REGISTER_PAYLOAD) {
+        return await fetch(`${process.env.REACT_APP_DOMAIN}/api/user/register`, {
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
