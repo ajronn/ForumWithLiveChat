@@ -12,7 +12,7 @@ namespace Forum.Transfer.Post.Data
 
         public DateTime CreatedAt { get; set; }
 
-        public DateTime EditedAt { get; set; }
+        public DateTime? EditedAt { get; set; }
 
         public string UserId { get; set; }
 

@@ -39,6 +39,7 @@ namespace Forum.Domain.Implementation.Service
             {
                 Content = command.Content,
                 CreatedAt = DateTime.Now,
+                EditedAt = null,
                 ThreadId = command.ThreadId,
                 UserId = userId,
                 User = user
