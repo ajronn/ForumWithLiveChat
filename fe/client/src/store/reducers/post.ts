@@ -1,12 +1,13 @@
 import { POST_ACTIONS } from "../actions/post"
+import { USER } from "./auth"
 
 export type POST = {
     postId: number,
     content: string,
     createdAt: Date,
-    editedAt: Date,
-    userId: any,
-    user: any,
+    editedAt: Date | null,
+    userId: string,
+    user: USER,
     threadId: number
 }
 

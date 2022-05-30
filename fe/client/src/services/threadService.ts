@@ -22,12 +22,29 @@ export class ThreadService {
         })
     }
 
-    static async post(name: string, description: string, content: string, subsectionId: number) {
-        await fetch(`${process.env.REACT_APP_DOMAIN}/api/thread/create`, {
+    static async getSingle(id: string) {
+        return await fetch(`${process.env.REACT_APP_DOMAIN}/api/thread/get?` + new URLSearchParams({
+            threadId: id
+        }), {
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': "http://localhost:3000"
+            },
+            method: "GET",
+        }).then((res: any) => res.json()).then((data) => {
+            return data.data.name;
+        })
+    }
+
+    static async post(name: string, description: string, content: string, subsectionId: number) {
+        const t = JSON.parse(window.sessionStorage.getItem('token') || '');
+        await fetch(`${process.env.REACT_APP_DOMAIN}/api/thread/create`, {
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': "http://localhost:3000",
+                'Authorization': `bearer ${t}`,
             },
             method: "POST",
             body: JSON.stringify({

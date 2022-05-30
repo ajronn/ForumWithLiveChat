@@ -1,8 +1,7 @@
 .content {
+    padding: 0 50px;
+    box-sizing: border-box;
     width: 100%;
-    display: grid;
-    height: fit-content;
-    row-gap: 20px;
 }
 
 .clickable {
@@ -11,4 +10,45 @@
 
 .backgound {
     background: #f1f1f1;
+}
+
+.header {
+    border-bottom: 1px solid #7cb2be;
+    height: 100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    font-size: 40px;
+    justify-content: space-between;
+    margin-bottom: 35px;
+}
+
+.sections {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(100vh - 200px);
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.search > *::before {
+    outline-color: white !important;
+    border-color: white !important;
+}
+
+.search > *::after {
+    outline-color: #7cb2be !important;
+    border-color: #7cb2be !important;
+}
+
+.search > * {
+    color: white !important;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
 }

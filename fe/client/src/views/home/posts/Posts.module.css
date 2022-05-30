@@ -1,37 +1,116 @@
-.container {
-    margin-top: 100px;
-    background: #f8f8fa;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-    padding: 50px;
-}
-
-.post {
-    border: 1px solid black;
-    margin-bottom: 40px;
-    display: grid;
-    grid-template-columns: 150px 1fr;
-    column-gap: 10px;
-    min-height: 300px;
-}
-
-.column {
+.content {
+    padding: 0 50px;
     box-sizing: border-box;
     width: 100%;
+}
+
+.header {
+    border-bottom: 1px solid #7cb2be;
     height: 100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    font-size: 40px;
+    justify-content: space-between;
+    margin-bottom: 35px;
+}
+
+.button > *{
+    color: #ffffff !important;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tile {
+    min-height: 100px;
+    box-shadow: 0px 0px 21px -4px rgba(66, 68, 90, 1);
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.postContent {
+    width: 100%;
+}
+
+.user {
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.buttonSec > * {
+    background-color: #439792 !important;
+}
+.buttonSec > *:hover {
+    background-color: #4aa59f !important;
+}
+
+.buttonSec {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+}
+
+.multiLine > * {
+    width: 100%;
+    resize: none;
+    min-height: 50px;
+    margin: 10px 0;
+}
+
+.white {
+    color: #ffffff;
+}
+
+.posts {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(100vh - 200px);
+    box-sizing: border-box;
     padding: 10px;
 }
 
-.content {
-    padding-top: 50px;
-}
-
-.date {
-    color: #dbdbdb;
-}
-
-.author {
-    padding: 20px;
-    height: 100%;
+.remove {
     display: flex;
+    width: 100%;
+    justify-content: end;
+}
+
+.smoked {
+    opacity: 0.3;
+}
+
+.text > * {
+    resize: none;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.removeModal {
+    height: 200;
+    width: 200;
+    background: #f8f8fa;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonsModal {
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.buttonsModal > * {
     justify-content: center;
 }
