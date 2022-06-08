@@ -17,7 +17,6 @@ type MESSAGE = {
 
 const Aside = () => {
     const [chat, setChat] = useState<MESSAGE[]>([]);
-    const [chosenEmoji, setChosenEmoji] = useState<any>(null);
     const [message, setMessage] = useState<string>('');
     const latestChat = useRef(null);
     const { user } = useSelector((state: IRootState) => state.auth)

@@ -1,4 +1,4 @@
-import { formatDate, makeUserNameFromEmail } from "../tools"
+import { formatDate, makeUserNameFromEmail, isPasswordCorrect } from "../tools"
 
 
 it('formats date correctly', () => {
@@ -12,3 +12,8 @@ it('formats username correctly', () => {
     expect(formatted).toBe('userName')
 })
 
+// describe('password', ()=> {
+//     it('validates length', ()=> {
+         
+//     })
+// })

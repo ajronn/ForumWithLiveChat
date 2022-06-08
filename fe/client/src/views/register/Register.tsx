@@ -73,15 +73,15 @@ export const Register = () => {
     return (
         <div className={style.container}>
             <div className={style.form} >
-                <h1>Register</h1>
+                <h1>Rejestracja</h1>
                 <div className={style.input} >
                     <Input onChange={(event) => { setPayload({ ...payload, email: event.target.value, userName: event.target.value }) }} placeholder="Email" />
                 </div>
                 <div className={style.input} >
-                    <Input onChange={(event) => { setPayload({ ...payload, password: event.target.value }) }} placeholder="Password" type="password" />
+                    <Input onChange={(event) => { setPayload({ ...payload, password: event.target.value }) }} placeholder="Hasło" type="password" />
                 </div>
                 <div className={style.button} >
-                    <Button variant="contained" onClick={register}>Register</Button>
+                    <Button variant="contained" onClick={register}>Zarejestruj</Button>
                 </div>
             </div>
         </div>

@@ -32,7 +32,7 @@ export const Body = () => {
                 Sekcje
                 <div className={style.search} >
                     <SearchIcon fontSize="large" />
-                    <Input onChange={(e) => setSearch(e.target.value)} />
+                    <Input onChange={(e) => setSearch(e.target.value)} placeholder="Wyszukaj" />
                 </div>
             </div>
             <div className={style.sections}>
